@@ -99,7 +99,8 @@ public class Utils {
 		Calendar c = Calendar.getInstance();
 		c.setTime(currentDate);
 		c.add(Calendar.HOUR, -7);
-		c.add(Calendar.MINUTE, -15); 
+		// c.add(Calendar.MINUTE, -15); 
+                c.add(Calendar.MINUTE, parameter.Parameters.warning_minutes);
 		Date minDate = c.getTime(); 
 		return minDate;
 	}

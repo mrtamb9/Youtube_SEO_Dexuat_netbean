@@ -157,37 +157,44 @@ public class MainWithMySQL {
         // check_comment
         boolean checkComment = false;
         if (!mapLimitComments.containsKey(url)) {
-            int temp = Utils.getRandomNumber(0, 1);
-            if (temp == 1) {
+            int temp = Utils.getRandomNumber(0, 100);
+            if (temp%2 == 1) {
                 checkComment = true;
                 mapLimitComments.put(url, 1);
             }
         } else if (mapLimitComments.get(url) < max_comments) {
-            int temp = Utils.getRandomNumber(0, 1);
-            if (temp == 1) {
+            int temp = Utils.getRandomNumber(0, 100);
+            if (temp%2 == 1) {
                 checkComment = true;
                 mapLimitComments.put(url, mapLimitComments.get(url) + 1);
             }
         }
+        int secondWait=0;
         if (checkComment && driver.findElements(By.className("comment-simplebox-renderer-collapsed-content")).size() > 0) {
             driver.findElement(By.className("comment-simplebox-renderer-collapsed-content")).click();
-
-            while (!driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).isDisplayed()) {
+            
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && !driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).isDisplayed()) {
                 System.out.println("waiting comment ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
             int index = Utils.getRandomNumber(0, parameters.listComments.size() - 1);
             String comment = parameters.listComments.get(index);
             System.out.println("comment: " + comment);
             driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).sendKeys(comment);
-            while (!driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).isDisplayed()) {
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && !driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).isDisplayed()) {
                 System.out.println("waiting submit comment ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
             driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).click();
-            while (driver.findElements(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).size() > 0) {
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && driver.findElements(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).size() > 0) {
                 System.out.println("waiting submit done ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
         }
 
@@ -241,23 +248,33 @@ public class MainWithMySQL {
     }
 
     void searchVideo(String id_hashtag, int indexVideo) throws InterruptedException {
-        System.out.println(id_hashtag);
+        System.out.println(id_hashtag);        
         driver.get("https://www.youtube.com/");
-        while (!driver.findElement(By.id("masthead-appbar-container")).isDisplayed()) {
+                
+        while (!driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
             System.out.println("waiting youtube.com ...");
             Thread.sleep(1000);
         }
+        
+        Thread.sleep(1000);
         driver.findElement(By.id("masthead-search-term")).sendKeys(id_hashtag.split("     ")[1] + " \"" + id_hashtag.split("     ")[0] + "\"");
         Thread.sleep(1000);
         driver.findElement(By.id("masthead-search-term")).sendKeys(Keys.ENTER);
-
-        Thread.sleep(1000);
-        while (driver.findElement(By.id("masthead-appbar-container")).isDisplayed()) {
+        
+        Thread.sleep(1000);        
+        int secondWait = 0;
+        while (secondWait < parameters.max_second_wait && driver.findElement(By.id("masthead-appbar-container")).isDisplayed()) {
             System.out.println("waiting search done ...");
             Thread.sleep(1000);
+            secondWait++;
         }
-        driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).click();
+        
+        if(driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).isDisplayed())
+        {
+            driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).click();
+        }        
 
+        Thread.sleep(5000);
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)", "");
 
@@ -275,8 +292,8 @@ public class MainWithMySQL {
         Thread.sleep(watch_time);
 
         // random like
-        int checkLike = Utils.getRandomNumber(0, 1);
-        if (checkLike == 1) {
+        int checkLike = Utils.getRandomNumber(0, 100);
+        if (checkLike%2 == 1) {
             if (driver.findElements(By.xpath("//*[@id=\"watch8-sentiment-actions\"]/span/span[1]/button")).size() > 0) {
                 if (!driver.findElement(By.xpath("//*[@id=\"watch8-sentiment-actions\"]/span/span[1]/button")).getAttribute("class").contains("hid yt-uix-tooltip")) {
                     System.out.println("Like video!");
@@ -286,26 +303,33 @@ public class MainWithMySQL {
         }
 
         // check_comment
-        int checkComment = Utils.getRandomNumber(0, 1);
-        if (checkComment == 1 && driver.findElements(By.className("comment-simplebox-renderer-collapsed-content")).size() > 0) {
+        int checkComment = Utils.getRandomNumber(0, 100);
+        if (checkComment%2 == 1 && driver.findElements(By.className("comment-simplebox-renderer-collapsed-content")).size() > 0) {
             driver.findElement(By.className("comment-simplebox-renderer-collapsed-content")).click();
-
-            while (!driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).isDisplayed()) {
+            
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && !driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).isDisplayed()) {
                 System.out.println("waiting comment ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
             int index = Utils.getRandomNumber(0, parameters.listComments1.size() - 1);
             String comment = parameters.listComments1.get(index);
             System.out.println("Comment video: " + comment);
             driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).sendKeys(comment);
-            while (!driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).isDisplayed()) {
+            
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && !driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).isDisplayed()) {
                 System.out.println("waiting submit comment ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
             driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).click();
-            while (driver.findElements(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).size() > 0) {
+            secondWait=0;
+            while (secondWait < parameters.max_second_wait && driver.findElements(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).size() > 0) {
                 System.out.println("waiting submit done ...");
                 Thread.sleep(1000);
+                secondWait++;
             }
         }
 

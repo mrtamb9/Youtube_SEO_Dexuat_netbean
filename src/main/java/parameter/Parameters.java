@@ -30,6 +30,9 @@ public class Parameters {
     public ArrayList<String> listComments1 = new ArrayList<String>();
     public int min_time_second1 = 0;
     public int max_time_second1 = 0;
+    
+    public static int max_second_wait = 60;
+    public static int warning_minutes = 60;
 
     public Parameters() {
         try {

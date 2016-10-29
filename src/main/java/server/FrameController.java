@@ -814,6 +814,7 @@ public class FrameController extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Success! " + listAccounts.size() + " accounts!");
             } catch (Exception e2) {
                 System.out.println("Error load account 2!");
+                e2.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Fail!");
             }
         }
