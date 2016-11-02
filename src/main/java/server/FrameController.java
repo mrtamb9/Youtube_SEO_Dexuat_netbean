@@ -380,7 +380,7 @@ public class FrameController extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("SEO Homepage", panelHomePage);
+        jTabbedPane1.addTab("SEO Keyword", panelHomePage);
 
         panelAccount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1105,9 +1105,6 @@ public class FrameController extends javax.swing.JFrame {
             }
             tf_myVideos.setText(filepath);
         }
-        if (rVal == JFileChooser.CANCEL_OPTION) {
-            tf_myVideos.setText("You pressed cancel");
-        }
     }//GEN-LAST:event_tf_myVideosMouseClicked
 
     private void tf_otherVideosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_otherVideosMouseClicked
@@ -1130,9 +1127,6 @@ public class FrameController extends javax.swing.JFrame {
                 tf_otherVideos.setText("Error");
             }
             tf_otherVideos.setText(filepath);
-        }
-        if (rVal == JFileChooser.CANCEL_OPTION) {
-            tf_otherVideos.setText("You pressed cancel");
         }
 
     }//GEN-LAST:event_tf_otherVideosMouseClicked
@@ -1157,9 +1151,6 @@ public class FrameController extends javax.swing.JFrame {
                 tf_comments.setText("Error");
             }
             tf_comments.setText(filepath);
-        }
-        if (rVal == JFileChooser.CANCEL_OPTION) {
-            tf_comments.setText("You pressed cancel");
         }
 
     }//GEN-LAST:event_tf_commentsMouseClicked
