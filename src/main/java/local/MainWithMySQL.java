@@ -53,6 +53,7 @@ public class MainWithMySQL {
 
     // login _youtube
     void login() {
+        System.out.println("Login...");
         driver.get("https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26feature%3Dsign_in_button%26next%3D%252F%26hl%3Den&service=youtube&uilel=3&hl=en#identifier");
         driver.findElement(By.id("Email")).sendKeys(parameters.username);
         driver.findElement(By.id("next")).click();
@@ -126,7 +127,7 @@ public class MainWithMySQL {
         System.out.println("Done init!");
     }
 
-    void watchVideo(String url) throws InterruptedException, Exception {
+    void watchVideo(String url, int min_time, int max_time) throws InterruptedException, Exception {
         url = url + "&t=1s";
         System.out.println(url);
         driver.get(url);
@@ -137,7 +138,7 @@ public class MainWithMySQL {
         jse.executeScript("window.scrollBy(0,250)", "");
         Thread.sleep(1000);
 
-        int watch_time = Utils.getRandomNumber(parameters.min_time_second, parameters.max_time_second);
+        int watch_time = Utils.getRandomNumber(min_time, max_time);
         System.out.println("watch_time = " + watch_time + "(s)");
 
         String log = simpleDateFormat.format(new Date()) + "     loop " + (iter + 1) + "     watching " + url + "     time " + watch_time + "(s)";
@@ -152,11 +153,13 @@ public class MainWithMySQL {
         while (step < max_step) {
             step++;
             if (step % 10 == 0) {
-                
-                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a/span[3]/span")).getAttribute("data-ytid");
-                System.out.println(tempChannel);
-                driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a")).sendKeys(Keys.ENTER);
-                
+
+//                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a/span[3]/span")).getAttribute("data-ytid");
+//                System.out.println(tempChannel);
+//                driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a")).sendKeys(Keys.ENTER);
+//                driver.findElement(By.id("watch-more-related-button")).click();
+//                Thread.sleep(1000);
+//                driver.findElement(By.xpath("//*[@id=\"watch-related\"]/li[1]/div[1]/div[1]/a")).sendKeys(Keys.ENTER);
                 if (myLogs.checkStop() == true || driver.getCurrentUrl().compareTo(url) != 0) {
                     return;
                 }
@@ -199,7 +202,7 @@ public class MainWithMySQL {
                     }
                     Thread.sleep(1000);
                 } catch (Exception e) {
-                    System.err.println("Error like a comment!");
+                    System.err.println("Like a comment fail!");
                 }
             }
 
@@ -213,7 +216,7 @@ public class MainWithMySQL {
                         Thread.sleep(2000);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("Subsribe fail!");
                 }
             }
         }
@@ -222,7 +225,7 @@ public class MainWithMySQL {
     void startSeoSuggest() throws Exception {
         myLogs.saveLog(simpleDateFormat.format(new Date()) + " starting... " + (new Date()));
         init_main();
-        Parameters.warning_seconds = parameters.max_time_second;
+        Parameters.warning_seconds = parameters.max_time_second_my_video;
 
         // String targetVideo = parameters.listTargetVideos.get(0);
         int sizeTargetVideo = parameters.listTargetVideos.size();
@@ -239,7 +242,7 @@ public class MainWithMySQL {
                 String otherVideo = parameters.listOtherVideos.get(index);
 
                 // other video
-                watchVideo(otherVideo);
+                watchVideo(otherVideo, parameters.min_time_second_other_video, parameters.max_time_second_other_video);
                 if (myLogs.checkStop() == true) {
                     break;
                 }
@@ -248,7 +251,7 @@ public class MainWithMySQL {
                 if (sizeTargetVideo >= 1) {
                     int indexTarget = Utils.getRandomNumber(0, 1000) % (sizeTargetVideo);
                     String targetVideo = parameters.listTargetVideos.get(indexTarget);
-                    watchVideo(targetVideo);
+                    watchVideo(targetVideo, parameters.min_time_second_my_video, parameters.max_time_second_my_video);
                     if (myLogs.checkStop() == true) {
                         break;
                     }
@@ -291,7 +294,7 @@ public class MainWithMySQL {
                 driver.findElement(By.id("masthead-search-term")).sendKeys(Keys.ENTER);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Search hashtag fail!");
         }
 
         Thread.sleep(1000);
@@ -315,7 +318,7 @@ public class MainWithMySQL {
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Search no result!");
             return;
         }
 
@@ -354,7 +357,7 @@ public class MainWithMySQL {
                         }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("Like fail!");
                 }
             }
 
@@ -397,7 +400,7 @@ public class MainWithMySQL {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Comment fail!");
             }
 
             Thread.sleep(2000);

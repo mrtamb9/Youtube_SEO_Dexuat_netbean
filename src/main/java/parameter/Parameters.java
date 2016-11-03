@@ -22,8 +22,10 @@ public class Parameters {
     public ArrayList<String> listTargetVideos = new ArrayList<String>();
     public ArrayList<String> listOtherVideos = new ArrayList<String>();
     public ArrayList<String> listComments = new ArrayList<String>();
-    public int min_time_second = 0;
-    public int max_time_second = 0;
+    public int min_time_second_my_video = 0;
+    public int max_time_second_my_video = 0;
+    public int min_time_second_other_video = 0;
+    public int max_time_second_other_video = 0;
     public int num_iteration = 0;
     public int num_times_comment = 0;
     
@@ -122,10 +124,14 @@ public class Parameters {
             while (resultset.next()) {
                 String id = resultset.getString("id");
                 String value = resultset.getString("value");
-                if (id.compareTo("max_time_second") == 0) {
-                    max_time_second = Integer.parseInt(value.trim());
-                } else if (id.compareTo("min_time_second") == 0) {
-                    min_time_second = Integer.parseInt(value.trim());
+                if (id.compareTo("max_time_second_my_video") == 0) {
+                    max_time_second_my_video = Integer.parseInt(value.trim());
+                } else if (id.compareTo("min_time_second_my_video") == 0) {
+                    min_time_second_my_video = Integer.parseInt(value.trim());
+                } else if (id.compareTo("max_time_second_other_video") == 0) {
+                    max_time_second_other_video = Integer.parseInt(value.trim());
+                } else if (id.compareTo("min_time_second_other_video") == 0) {
+                    min_time_second_other_video = Integer.parseInt(value.trim());
                 } else if (id.compareTo("num_iteration") == 0) {
                     num_iteration = Integer.parseInt(value.trim());
                 } else if (id.compareTo("num_times_comment") == 0) {
@@ -165,8 +171,10 @@ public class Parameters {
 
     public void printParameters() {
         System.out.println("username: " + username);
-        System.out.println("max_time_second = " + max_time_second + " (s)");
-        System.out.println("min_time_second = " + min_time_second + " (s)");
+        System.out.println("max_time_second_my_video = " + max_time_second_my_video + " (s)");
+        System.out.println("min_time_second_my_video = " + min_time_second_my_video + " (s)");
+        System.out.println("max_time_second_other_video = " + max_time_second_other_video + " (s)");
+        System.out.println("min_time_second_other_video = " + min_time_second_other_video + " (s)");
         System.out.println("num_iteration = " + num_iteration);
         System.out.println("num_times_comment = " + num_times_comment);
 

@@ -39,7 +39,7 @@ public class FrameController extends javax.swing.JFrame {
     ArrayList<String> listOtherVideos;
     ArrayList<String> listComments;
     ArrayList<String> listAccounts;
-    
+
     ArrayList<String> listComments1;
 
     public FrameController() {
@@ -94,7 +94,6 @@ public class FrameController extends javax.swing.JFrame {
         tf_password = new javax.swing.JPasswordField();
         panelParameter = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -104,6 +103,17 @@ public class FrameController extends javax.swing.JFrame {
         tf_otherVideos = new javax.swing.JTextField();
         tf_comments = new javax.swing.JTextField();
         btnSubmitParameters = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        tf_minTimeOther = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        tf_maxTimeOther = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
         panelAction = new javax.swing.JPanel();
         btnLoadAllIP = new javax.swing.JButton();
         btnLoadWarningIP = new javax.swing.JButton();
@@ -469,9 +479,7 @@ public class FrameController extends javax.swing.JFrame {
 
         panelParameter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel4.setText("Min Time (s)");
-
-        jLabel5.setText("Max Time (s)");
+        jLabel4.setText("Watch time (s)");
 
         jLabel6.setText("My Videos");
 
@@ -541,6 +549,46 @@ public class FrameController extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("from");
+
+        jLabel15.setText("to");
+
+        jLabel18.setText("(s)");
+
+        jLabel19.setText("(s)");
+
+        jLabel20.setText("Watch time (s)");
+
+        jLabel21.setText("from");
+
+        tf_minTimeOther.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_minTimeOtherActionPerformed(evt);
+            }
+        });
+        tf_minTimeOther.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_minTimeOtherKeyTyped(evt);
+            }
+        });
+
+        jLabel22.setText("(s)");
+
+        jLabel23.setText("to");
+
+        tf_maxTimeOther.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_maxTimeOtherActionPerformed(evt);
+            }
+        });
+        tf_maxTimeOther.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_maxTimeOtherKeyTyped(evt);
+            }
+        });
+
+        jLabel24.setText("(s)");
+
         javax.swing.GroupLayout panelParameterLayout = new javax.swing.GroupLayout(panelParameter);
         panelParameter.setLayout(panelParameterLayout);
         panelParameterLayout.setHorizontalGroup(
@@ -551,20 +599,47 @@ public class FrameController extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_minTime, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_maxTime, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_otherVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_myVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_comments, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tf_comments, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_myVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_otherVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelParameterLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelParameterLayout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(tf_minTime, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(tf_maxTime, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel19))
+                                    .addGroup(panelParameterLayout.createSequentialGroup()
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(tf_minTimeOther, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel22)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jLabel23)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(tf_maxTimeOther, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel24))))))
                     .addGroup(panelParameterLayout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(btnSubmitParameters, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSubmitParameters, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelParameterLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelParameterLayout.setVerticalGroup(
@@ -572,20 +647,30 @@ public class FrameController extends javax.swing.JFrame {
             .addGroup(panelParameterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tf_minTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_maxTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tf_myVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_minTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_maxTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tf_otherVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(tf_minTimeOther, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_maxTimeOther, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -656,7 +741,7 @@ public class FrameController extends javax.swing.JFrame {
                     .addComponent(btnLoadWarningIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnStop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoadParameter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadParameter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addComponent(btnDeleteIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -688,20 +773,20 @@ public class FrameController extends javax.swing.JFrame {
             panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuggestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelSuggestLayout.createSequentialGroup()
                         .addComponent(panelAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panelParameter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelSuggestLayout.setVerticalGroup(
             panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuggestLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelParameter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
                     .addComponent(panelAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -716,12 +801,12 @@ public class FrameController extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, Short.MAX_VALUE))
         );
@@ -765,15 +850,20 @@ public class FrameController extends javax.swing.JFrame {
 
         if (ip.length() > 0 && username.length() > 0 && password.length() > 0) {
             try {
-                serverControler.insertAccount(ip, username, password);
-                listModelInformation.addElement(listModelInformation.getSize() + ".     " + ip + "     " + username);
+                boolean done = serverControler.insertAccount(ip, username, password);
+                if (done) {
+                    listModelInformation.addElement(listModelInformation.getSize() + ".     " + ip + "     " + username);
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    tf_ip.setText("");
+                    tf_username.setText("");
+                    tf_password.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fail!");
+                }
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Fail!");
             }
-            JOptionPane.showMessageDialog(null, "Success!");
-            tf_ip.setText("");
-            tf_username.setText("");
-            tf_password.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Fail!");
         }
@@ -810,8 +900,13 @@ public class FrameController extends javax.swing.JFrame {
             }
 
             try {
-                serverControler.insertMultiAccount(listAccounts);
-                JOptionPane.showMessageDialog(null, "Success! " + listAccounts.size() + " accounts!");
+                boolean done = serverControler.insertMultiAccount(listAccounts);
+                if (done) {
+                    JOptionPane.showMessageDialog(null, "Success! " + listAccounts.size() + " accounts!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fail!");
+                }
+
             } catch (Exception e2) {
                 System.out.println("Error load account 2!");
                 e2.printStackTrace();
@@ -824,31 +919,35 @@ public class FrameController extends javax.swing.JFrame {
     private void btnLoadAllIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadAllIPActionPerformed
 
         try {
-            serverControler.getAllAccountFromMySQL();
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listIps.size();
+                int index = jListInformation.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformation.getSelectedIndex();
 
-            int listIpSize = serverControler.listIps.size();
-            int index = jListInformation.getLastVisibleIndex();
-            if (index > listIpSize - 1) {
-                index = listIpSize - 1;
+                String arrayStrings[] = new String[serverControler.listInfos.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listInfos.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformation.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformation.setListData(arrayStrings);
+
+                jListInformation.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformation.setSelectedIndex(selectedIndex);
+                }
+
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
             }
-            int selectedIndex = jListInformation.getSelectedIndex();
 
-            String arrayStrings[] = new String[serverControler.listInfos.size() + 1];
-            arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
-            for (int i = 0; i < listIpSize; i++) {
-                String tempString = serverControler.listInfos.get(i);
-                arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
-            }
-            jListInformation.setListData(new String[0]);
-            Thread.sleep(1);
-            jListInformation.setListData(arrayStrings);
-
-            jListInformation.ensureIndexIsVisible(index);
-            if (selectedIndex >= 0) {
-                jListInformation.setSelectedIndex(selectedIndex);
-            }
-
-            JOptionPane.showMessageDialog(null, "Success!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fail!");
             e.printStackTrace();
@@ -861,8 +960,10 @@ public class FrameController extends javax.swing.JFrame {
         if (listTargetVideos == null || listOtherVideos == null || listComments == null) {
             JOptionPane.showMessageDialog(null, "Fail!");
         } else {
-            String min_time_second = tf_minTime.getText();
-            String max_time_second = tf_maxTime.getText();
+            String min_time_second_my_video = tf_minTime.getText();
+            String max_time_second_my_video = tf_maxTime.getText();
+            String min_time_second_other_video = tf_minTimeOther.getText();
+            String max_time_second_other_video = tf_maxTimeOther.getText();
             String target_videos = "";
             for (int i = 0; i < listTargetVideos.size(); i++) {
                 target_videos += listTargetVideos.get(i) + ", ";
@@ -887,12 +988,18 @@ public class FrameController extends javax.swing.JFrame {
                 comments = comments.substring(0, comments.length() - 2);
             }
 
-            if (min_time_second.length() > 0 && max_time_second.length() > 0 && target_videos.length() > 0
-                    && other_videos.length() > 0 && comments.length() > 0) {
+            if (min_time_second_my_video.length() > 0 && max_time_second_my_video.length() > 0
+                    && min_time_second_other_video.length() > 0 && max_time_second_other_video.length() > 0
+                    && target_videos.length() > 0 && other_videos.length() > 0 && comments.length() > 0) {
                 try {
-                    serverControler.updateParameters(min_time_second, max_time_second, target_videos, other_videos,
-                            comments);
-                    JOptionPane.showMessageDialog(null, "Success!");
+                    boolean done = serverControler.updateParameters(min_time_second_my_video, max_time_second_my_video,
+                            min_time_second_other_video, max_time_second_other_video,
+                            target_videos, other_videos, comments);
+                    if (done) {
+                        JOptionPane.showMessageDialog(null, "Success!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fail!");
+                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Fail!");
                     e.printStackTrace();
@@ -906,30 +1013,34 @@ public class FrameController extends javax.swing.JFrame {
     private void btnLoadWarningIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadWarningIPActionPerformed
 
         try {
-            serverControler.getAllAccountFromMySQL();
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listWarning.size();
+                int index = jListInformation.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformation.getSelectedIndex();
 
-            int listIpSize = serverControler.listWarning.size();
-            int index = jListInformation.getLastVisibleIndex();
-            if (index > listIpSize - 1) {
-                index = listIpSize - 1;
-            }
-            int selectedIndex = jListInformation.getSelectedIndex();
+                String arrayStrings[] = new String[serverControler.listWarning.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listWarning.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformation.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformation.setListData(arrayStrings);
 
-            String arrayStrings[] = new String[serverControler.listWarning.size() + 1];
-            arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
-            for (int i = 0; i < listIpSize; i++) {
-                String tempString = serverControler.listWarning.get(i);
-                arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                jListInformation.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformation.setSelectedIndex(selectedIndex);
+                }
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
             }
-            jListInformation.setListData(new String[0]);
-            Thread.sleep(1);
-            jListInformation.setListData(arrayStrings);
 
-            jListInformation.ensureIndexIsVisible(index);
-            if (selectedIndex >= 0) {
-                jListInformation.setSelectedIndex(selectedIndex);
-            }
-            JOptionPane.showMessageDialog(null, "Success!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fail!");
             e.printStackTrace();
@@ -964,15 +1075,19 @@ public class FrameController extends javax.swing.JFrame {
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure delete? " + ip,
                             "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.deleteAccountInMySQL(groupIPs);
-                        if (ip.compareTo("0.0.0.0") == 0) {
-                            listModelInformation.removeAllElements();
-                            jListInformation.setListData(new String[0]);
-                        } else {
-                            listModelInformation.removeElement(selection);
-                        }
+                        boolean done = serverControler.deleteAccountInMySQL(groupIPs);
+                        if (done) {
+                            if (ip.compareTo("0.0.0.0") == 0) {
+                                listModelInformation.removeAllElements();
+                                jListInformation.setListData(new String[0]);
+                            } else {
+                                listModelInformation.removeElement(selection);
+                            }
 
-                        JOptionPane.showMessageDialog(null, "Success!");
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1010,10 +1125,12 @@ public class FrameController extends javax.swing.JFrame {
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure start this? " + ip,
                             "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.setStatus(groupIPs, 1);
-                        JOptionPane.showMessageDialog(null, "Success!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Fail!");
+                        boolean done = serverControler.setStatus(groupIPs, 1);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1051,10 +1168,13 @@ public class FrameController extends javax.swing.JFrame {
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure stop this? " + ip,
                             "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.setStatus(groupIPs, 0);
-                        JOptionPane.showMessageDialog(null, "Success!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Fail!");
+                        boolean done = serverControler.setStatus(groupIPs, 0);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
+
                     }
                 }
             }
@@ -1188,8 +1308,13 @@ public class FrameController extends javax.swing.JFrame {
         if (hashtag.length() > 0 && idVideos.length() > 0) {
             try {
                 listModelHashtag.addElement(idVideos + "     " + hashtag);
-                serverControler.insertHashtag(idVideos, hashtag);
-                JOptionPane.showMessageDialog(null, "Success!");
+                boolean done = serverControler.insertHashtag(idVideos, hashtag);
+                if (done) {
+                    JOptionPane.showMessageDialog(null, "Success!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fail!");
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Fail!");
@@ -1209,11 +1334,15 @@ public class FrameController extends javax.swing.JFrame {
                 if (selection.split("     ").length >= 2) {
                     String video_id = selection.split("     ")[0].trim();
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure delete? " + video_id,
-                        "Warning", JOptionPane.YES_NO_OPTION);
+                            "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.deleteHashTagInMySQL(video_id);
+                        boolean done = serverControler.deleteHashTagInMySQL(video_id);
                         listModelHashtag.removeElement(selection);
-                        JOptionPane.showMessageDialog(null, "Success!");
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1264,9 +1393,9 @@ public class FrameController extends javax.swing.JFrame {
                         groupIPs += "('" + ip + "')";
                     }
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure delete? " + ip,
-                        "Warning", JOptionPane.YES_NO_OPTION);
+                            "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.deleteAccountInMySQL(groupIPs);
+                        boolean done = serverControler.deleteAccountInMySQL(groupIPs);
                         if (ip.compareTo("0.0.0.0") == 0) {
                             listModelInformation1.removeAllElements();
                             jListInformation1.setListData(new String[0]);
@@ -1274,7 +1403,11 @@ public class FrameController extends javax.swing.JFrame {
                             listModelInformation1.removeElement(selection);
                         }
 
-                        JOptionPane.showMessageDialog(null, "Success!");
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1325,12 +1458,14 @@ public class FrameController extends javax.swing.JFrame {
                         groupIPs += "('" + ip + "')";
                     }
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure stop this? " + ip,
-                        "Warning", JOptionPane.YES_NO_OPTION);
+                            "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.setStatus(groupIPs, 0);
-                        JOptionPane.showMessageDialog(null, "Success!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Fail!");
+                        boolean done = serverControler.setStatus(groupIPs, 0);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1364,12 +1499,14 @@ public class FrameController extends javax.swing.JFrame {
                         groupIPs += "('" + ip + "')";
                     }
                     int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure start this? " + ip,
-                        "Warning", JOptionPane.YES_NO_OPTION);
+                            "Warning", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        serverControler.setStatus(groupIPs, 2);
-                        JOptionPane.showMessageDialog(null, "Success!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Fail!");
+                        boolean done = serverControler.setStatus(groupIPs, 2);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
                     }
                 }
             }
@@ -1381,30 +1518,34 @@ public class FrameController extends javax.swing.JFrame {
 
     private void btnLoadWarningIP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadWarningIP1ActionPerformed
         try {
-            serverControler.getAllAccountFromMySQL();
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listWarning.size();
+                int index = jListInformation1.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformation1.getSelectedIndex();
 
-            int listIpSize = serverControler.listWarning.size();
-            int index = jListInformation1.getLastVisibleIndex();
-            if (index > listIpSize - 1) {
-                index = listIpSize - 1;
-            }
-            int selectedIndex = jListInformation1.getSelectedIndex();
+                String arrayStrings[] = new String[serverControler.listWarning.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listWarning.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformation1.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformation1.setListData(arrayStrings);
 
-            String arrayStrings[] = new String[serverControler.listWarning.size() + 1];
-            arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
-            for (int i = 0; i < listIpSize; i++) {
-                String tempString = serverControler.listWarning.get(i);
-                arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                jListInformation1.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformation1.setSelectedIndex(selectedIndex);
+                }
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
             }
-            jListInformation1.setListData(new String[0]);
-            Thread.sleep(1);
-            jListInformation1.setListData(arrayStrings);
 
-            jListInformation1.ensureIndexIsVisible(index);
-            if (selectedIndex >= 0) {
-                jListInformation1.setSelectedIndex(selectedIndex);
-            }
-            JOptionPane.showMessageDialog(null, "Success!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fail!");
             e.printStackTrace();
@@ -1413,31 +1554,34 @@ public class FrameController extends javax.swing.JFrame {
 
     private void btnLoadAllIP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadAllIP1ActionPerformed
         try {
-            serverControler.getAllAccountFromMySQL();
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listIps.size();
+                int index = jListInformation1.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformation1.getSelectedIndex();
 
-            int listIpSize = serverControler.listIps.size();
-            int index = jListInformation1.getLastVisibleIndex();
-            if (index > listIpSize - 1) {
-                index = listIpSize - 1;
+                String arrayStrings[] = new String[serverControler.listInfos.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listInfos.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformation1.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformation1.setListData(arrayStrings);
+
+                jListInformation1.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformation1.setSelectedIndex(selectedIndex);
+                }
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
             }
-            int selectedIndex = jListInformation1.getSelectedIndex();
 
-            String arrayStrings[] = new String[serverControler.listInfos.size() + 1];
-            arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
-            for (int i = 0; i < listIpSize; i++) {
-                String tempString = serverControler.listInfos.get(i);
-                arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
-            }
-            jListInformation1.setListData(new String[0]);
-            Thread.sleep(1);
-            jListInformation1.setListData(arrayStrings);
-
-            jListInformation1.ensureIndexIsVisible(index);
-            if (selectedIndex >= 0) {
-                jListInformation1.setSelectedIndex(selectedIndex);
-            }
-
-            JOptionPane.showMessageDialog(null, "Success!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fail!");
             e.printStackTrace();
@@ -1486,9 +1630,6 @@ public class FrameController extends javax.swing.JFrame {
             }
             tf_comments1.setText(filepath);
         }
-        if (rVal == JFileChooser.CANCEL_OPTION) {
-            tf_comments1.setText("You pressed cancel");
-        }
     }//GEN-LAST:event_tf_comments1MouseClicked
 
     private void tf_comments1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_comments1ActionPerformed
@@ -1500,7 +1641,7 @@ public class FrameController extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Fail!");
         } else {
             String min_time_second = tf_minTime1.getText();
-            String max_time_second = tf_maxTime1.getText();            
+            String max_time_second = tf_maxTime1.getText();
 
             String comments = "";
             for (int i = 0; i < listComments1.size(); i++) {
@@ -1512,8 +1653,12 @@ public class FrameController extends javax.swing.JFrame {
 
             if (min_time_second.length() > 0 && max_time_second.length() > 0 && comments.length() > 0) {
                 try {
-                    serverControler.updateParametersHomepage(min_time_second, max_time_second, comments);
-                    JOptionPane.showMessageDialog(null, "Success!");
+                    boolean done = serverControler.updateParametersHomepage(min_time_second, max_time_second, comments);
+                    if (done) {
+                        JOptionPane.showMessageDialog(null, "Success!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fail!");
+                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Fail!");
                     e.printStackTrace();
@@ -1523,6 +1668,22 @@ public class FrameController extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSubmitParameters1ActionPerformed
+
+    private void tf_minTimeOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_minTimeOtherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_minTimeOtherActionPerformed
+
+    private void tf_minTimeOtherKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minTimeOtherKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_minTimeOtherKeyTyped
+
+    private void tf_maxTimeOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_maxTimeOtherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_maxTimeOtherActionPerformed
+
+    private void tf_maxTimeOtherKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxTimeOtherKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_maxTimeOtherKeyTyped
 
     /**
      * @param args the command line arguments
@@ -1555,9 +1716,9 @@ public class FrameController extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrameController myUI = new FrameController();               
-                myUI.setLocationRelativeTo(null);     
-                myUI.setVisible(false);                        
+                FrameController myUI = new FrameController();
+                myUI.setLocationRelativeTo(null);
+                myUI.setVisible(false);
             }
         });
     }
@@ -1587,10 +1748,18 @@ public class FrameController extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1615,8 +1784,10 @@ public class FrameController extends javax.swing.JFrame {
     private javax.swing.JTextField tf_ip;
     private javax.swing.JTextField tf_maxTime;
     private javax.swing.JTextField tf_maxTime1;
+    private javax.swing.JTextField tf_maxTimeOther;
     private javax.swing.JTextField tf_minTime;
     private javax.swing.JTextField tf_minTime1;
+    private javax.swing.JTextField tf_minTimeOther;
     private javax.swing.JTextField tf_myVideos;
     private javax.swing.JTextField tf_otherVideos;
     private javax.swing.JPasswordField tf_password;

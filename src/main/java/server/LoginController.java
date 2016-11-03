@@ -51,6 +51,12 @@ public class LoginController extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        tf_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_usernameKeyPressed(evt);
+            }
+        });
+
         btn_login.setText("Login");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +184,33 @@ public class LoginController extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tf_passwordKeyPressed
+
+    private void tf_usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usernameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String username = tf_username.getText().trim();
+            String password = tf_password.getText();
+
+//            if (username.compareTo("nguyen") != 0) {
+//                SystemInfo.dbName = SystemInfo.dbName + "_" + username;
+//            }
+
+            if (username.length() > 0 && password.length() > 0) {
+                try {
+                    checkLogin = ServerControls.checkLogin(username, password);
+                    if (checkLogin == false) {
+                        JOptionPane.showMessageDialog(null, "Fail!");
+                    } else {
+                        FrameController myUI = new FrameController();
+                        myUI.setLocationRelativeTo(null);
+                        myUI.setVisible(true);
+                        this.hide();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Fail!");
+                }
+            }
+        }
+    }//GEN-LAST:event_tf_usernameKeyPressed
 
     /**
      * @param args the command line arguments
