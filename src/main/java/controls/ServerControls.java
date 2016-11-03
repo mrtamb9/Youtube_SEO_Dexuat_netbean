@@ -249,12 +249,12 @@ public class ServerControls {
             statement = connect.createStatement();
 
             String query = "UPDATE parameters_dexuat SET value = CASE id"
-                    + " WHEN 'min_time_second_my_video' THEN '" + min_time_second_my_video 
-                    + "' WHEN 'max_time_second_my_video' THEN '" + max_time_second_my_video 
-                    + "' WHEN 'min_time_second_other_video' THEN '" + min_time_second_other_video 
+                    + " WHEN 'min_time_second_my_video' THEN '" + min_time_second_my_video
+                    + "' WHEN 'max_time_second_my_video' THEN '" + max_time_second_my_video
+                    + "' WHEN 'min_time_second_other_video' THEN '" + min_time_second_other_video
                     + "' WHEN 'max_time_second_other_video' THEN '" + max_time_second_other_video
                     + "' WHEN 'other_videos' THEN '" + other_videos.trim()
-                    + "' WHEN 'target_videos' THEN '" + target_videos.trim() 
+                    + "' WHEN 'target_videos' THEN '" + target_videos.trim()
                     + "' WHEN 'comments' THEN '" + comments.trim()
                     + "' END WHERE id IN("
                     + "'max_time_second_my_video'"
@@ -281,11 +281,55 @@ public class ServerControls {
         }
     }
 
+    public boolean updateParametersClickSuggest(String min_time_second_my_channel, String max_time_second_my_channel,
+            String min_time_second_source_video, String max_time_second_source_video,
+            String channels, String sourceVideos, String comments) {
+        Connection connect = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+
+        try {
+            connect = ConnectionPool.getConnection();
+            statement = connect.createStatement();
+
+            String query = "UPDATE parameters_dexuat SET value = CASE id"
+                    + " WHEN 'min_time_second_my_channel' THEN '" + min_time_second_my_channel
+                    + "' WHEN 'max_time_second_my_channel' THEN '" + max_time_second_my_channel
+                    + "' WHEN 'min_time_second_source_video' THEN '" + min_time_second_source_video
+                    + "' WHEN 'max_time_second_source_video' THEN '" + max_time_second_source_video
+                    + "' WHEN 'channels' THEN '" + channels.trim()
+                    + "' WHEN 'source_videos' THEN '" + sourceVideos.trim()
+                    + "' WHEN 'comments_click_suggest' THEN '" + comments.trim()
+                    + "' END WHERE id IN("
+                    + "'min_time_second_my_channel'"
+                    + ", "
+                    + "'max_time_second_my_channel'"
+                    + ", "
+                    + "'min_time_second_source_video'"
+                    + ", "
+                    + "'max_time_second_source_video'"
+                    + ", "
+                    + "'channels'"
+                    + ", "
+                    + "'source_videos'"
+                    + ", "
+                    + "'comments_click_suggest'"
+                    + ");";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            ConnectionPool.closeConnection(resultset, statement, connect);
+            return true;
+        } catch (Exception e) {
+            ConnectionPool.closeConnection(resultset, statement, connect);
+            return false;
+        }
+    }
+
     public boolean updateParametersHomepage(String min_time_second, String max_time_second, String comments) {
         Connection connect = null;
         Statement statement = null;
         ResultSet resultset = null;
-        
+
         System.out.println(comments);
 
         try {
@@ -367,8 +411,8 @@ public class ServerControls {
         listParameters.add("");
 
         listParameters.add("Watch my video random from " + min_time_second_my_video + "(s) to " + max_time_second_my_video + "(s)");
-        listParameters.add("");   
-        
+        listParameters.add("");
+
         listParameters.add("Watch other video random from " + min_time_second_other_video + "(s) to " + max_time_second_other_video + "(s)");
         listParameters.add("");
 
@@ -449,6 +493,99 @@ public class ServerControls {
         listParameters.add("Comments:");
         for (int i = 0; i < listComments1.size(); i++) {
             listParameters.add("     " + (i + 1) + ". " + listComments1.get(i));
+        }
+
+        // extract into array
+        String[] arrayParameters = new String[listParameters.size()];
+        for (int i = 0; i < listParameters.size(); i++) {
+            arrayParameters[i] = listParameters.get(i);
+        }
+
+        return arrayParameters;
+    }
+
+    public String[] getParameterClickSuggest() {
+        ArrayList<String> listParameters = new ArrayList<>();
+
+        int max_time_second_my_channel = -1;
+        int min_time_second_my_channel = -1;
+        int max_time_second_source_video = -1;
+        int min_time_second_source_video = -1;
+        ArrayList<String> listComments = new ArrayList<>();
+        ArrayList<String> listChannels = new ArrayList<>();
+        ArrayList<String> listSourceVideos = new ArrayList<>();
+
+        Connection connect = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+        try {
+            connect = ConnectionPool.getConnection();
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM parameters_dexuat;";
+            System.out.println(query);
+            resultset = statement.executeQuery(query);
+            while (resultset.next()) {
+                String id = resultset.getString("id");
+                String value = resultset.getString("value");
+                if (value != null) {
+                    if (id.compareTo("max_time_second_my_channel") == 0) {
+                        max_time_second_my_channel = Integer.parseInt(value.trim());
+                    } else if (id.compareTo("min_time_second_my_channel") == 0) {
+                        min_time_second_my_channel = Integer.parseInt(value.trim());
+                    } else if (id.compareTo("max_time_second_source_video") == 0) {
+                        max_time_second_source_video = Integer.parseInt(value.trim());
+                    } else if (id.compareTo("min_time_second_source_video") == 0) {
+                        min_time_second_source_video = Integer.parseInt(value.trim());
+                    } else if (id.compareTo("comments_click_suggest") == 0) {
+                        String[] arrayComments = value.split(",");
+                        for (int i = 0; i < arrayComments.length; i++) {
+                            listComments.add(arrayComments[i].trim());
+                        }
+                    } else if (id.compareTo("channels") == 0) {
+                        String[] arrayVideos = value.split(",");
+                        for (int i = 0; i < arrayVideos.length; i++) {
+                            listChannels.add(arrayVideos[i].trim());
+                        }
+                    } else if (id.compareTo("source_videos") == 0) {
+                        String[] arrayVideos = value.split(",");
+                        for (int i = 0; i < arrayVideos.length; i++) {
+                            listSourceVideos.add(arrayVideos[i].trim());
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.closeConnection(resultset, statement, connect);
+        }
+
+        listParameters.add("=== Seo Click Suggest Videos ===");
+        listParameters.add("");
+
+        listParameters.add("Watch my channel random from " + min_time_second_my_channel + "(s) to " + max_time_second_my_channel + "(s)");
+        listParameters.add("");
+
+        listParameters.add("Watch other video random from " + min_time_second_source_video + "(s) to " + max_time_second_source_video + "(s)");
+        listParameters.add("");
+
+        listParameters.add("My Channels:");
+        listParameters.add("");
+        for (int i = 0; i < listChannels.size(); i++) {
+            listParameters.add("     " + (i + 1) + ". " + listChannels.get(i));
+        }
+
+        listParameters.add("");
+        listParameters.add("Source Videos:");
+        for (int i = 0; i < listSourceVideos.size(); i++) {
+            listParameters.add("     " + (i + 1) + ". " + listSourceVideos.get(i));
+        }
+
+        listParameters.add("");
+        listParameters.add("Comments:");
+        for (int i = 0; i < listComments.size(); i++) {
+            listParameters.add("     " + (i + 1) + ". " + listComments.get(i));
         }
 
         // extract into array

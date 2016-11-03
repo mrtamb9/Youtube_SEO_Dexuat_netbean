@@ -76,7 +76,7 @@ public class LocalControls {
     }
 
     public boolean checkStop() {
-        boolean check = true;
+        boolean check = false;
         Connection connect = null;
         Statement statement = null;
         ResultSet resultset = null;
@@ -88,10 +88,8 @@ public class LocalControls {
             resultset = statement.executeQuery(query);
             if (resultset.next()) {
                 String running = resultset.getString("running");
-                if (running != null) {
-                    if (running.compareTo("1") == 0 || running.compareTo("2") == 0) {
-                        check = false;
-                    }
+                if (running == null || running.compareTo("0") == 0) {
+                    check = true;
                 }
             }
             ConnectionPool.closeConnection(resultset, statement, connect);

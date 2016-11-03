@@ -39,8 +39,11 @@ public class FrameController extends javax.swing.JFrame {
     ArrayList<String> listOtherVideos;
     ArrayList<String> listComments;
     ArrayList<String> listAccounts;
-
     ArrayList<String> listComments1;
+
+    ArrayList<String> listChannels;
+    ArrayList<String> listSourceVideosClickSuggest;
+    ArrayList<String> listCommentsClickSuggest;
 
     public FrameController() {
         initComponents();
@@ -55,7 +58,17 @@ public class FrameController extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabPanel = new javax.swing.JTabbedPane();
+        panelAccountManager = new javax.swing.JPanel();
+        panelAccount = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tf_username = new javax.swing.JTextField();
+        tf_ip = new javax.swing.JTextField();
+        btnChooseFileAccount = new javax.swing.JButton();
+        btnAddOneAccount = new javax.swing.JButton();
+        tf_password = new javax.swing.JPasswordField();
         panelHomePage = new javax.swing.JPanel();
         panelAction1 = new javax.swing.JPanel();
         btnLoadAllIP1 = new javax.swing.JButton();
@@ -83,15 +96,6 @@ public class FrameController extends javax.swing.JFrame {
         tf_comments1 = new javax.swing.JTextField();
         btnSubmitParameters1 = new javax.swing.JButton();
         panelSuggest = new javax.swing.JPanel();
-        panelAccount = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        tf_username = new javax.swing.JTextField();
-        tf_ip = new javax.swing.JTextField();
-        btnChooseFileAccount = new javax.swing.JButton();
-        btnAddOneAccount = new javax.swing.JButton();
-        tf_password = new javax.swing.JPasswordField();
         panelParameter = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -123,15 +127,150 @@ public class FrameController extends javax.swing.JFrame {
         btnDeleteIP = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListInformation = new javax.swing.JList<>();
+        panelClickSuggest = new javax.swing.JPanel();
+        panelAction2 = new javax.swing.JPanel();
+        btnLoadAllIPClickSuggest = new javax.swing.JButton();
+        btnLoadWarningIPClickSuggest = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListInformationClickSuggest = new javax.swing.JList<>();
+        btn_StartClickSuggest = new javax.swing.JButton();
+        btnStopClickSuggest = new javax.swing.JButton();
+        btnLoadParameterClickSuggest = new javax.swing.JButton();
+        btnDeleteIPClickSuggest = new javax.swing.JButton();
+        panelParameter1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        tf_minTimeClickVideo = new javax.swing.JTextField();
+        tf_Channels = new javax.swing.JTextField();
+        tf_maxTimeClickVideo = new javax.swing.JTextField();
+        tf_sourceVideos = new javax.swing.JTextField();
+        tf_commentsClickSuggest = new javax.swing.JTextField();
+        btnSubmitParametersClickSuggest = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        tf_minTimeSourceVideo = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        tf_maxTimeSourceVideo = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SEO YOUTUBE");
         setMinimumSize(new java.awt.Dimension(800, 700));
         setPreferredSize(new java.awt.Dimension(846, 600));
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(800, 700));
+        tabPanel.setPreferredSize(new java.awt.Dimension(800, 700));
 
-        panelHomePage.setBorder(null);
+        panelAccount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("UserName");
+
+        jLabel2.setText("IP Address");
+
+        jLabel3.setText("Password");
+
+        tf_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_usernameActionPerformed(evt);
+            }
+        });
+
+        tf_ip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_ipActionPerformed(evt);
+            }
+        });
+        tf_ip.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_ipKeyTyped(evt);
+            }
+        });
+
+        btnChooseFileAccount.setText("Choose File Account");
+        btnChooseFileAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseFileAccountActionPerformed(evt);
+            }
+        });
+
+        btnAddOneAccount.setText("Save Account");
+        btnAddOneAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddOneAccountActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelAccountLayout = new javax.swing.GroupLayout(panelAccount);
+        panelAccount.setLayout(panelAccountLayout);
+        panelAccountLayout.setHorizontalGroup(
+            panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAccountLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_ip, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(tf_username)
+                    .addComponent(tf_password))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAccountLayout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAddOneAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChooseFileAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44))
+        );
+        panelAccountLayout.setVerticalGroup(
+            panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAccountLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_ip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAddOneAccount)
+                .addGap(12, 12, 12)
+                .addComponent(btnChooseFileAccount)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelAccountManagerLayout = new javax.swing.GroupLayout(panelAccountManager);
+        panelAccountManager.setLayout(panelAccountManagerLayout);
+        panelAccountManagerLayout.setHorizontalGroup(
+            panelAccountManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAccountManagerLayout.createSequentialGroup()
+                .addContainerGap(227, Short.MAX_VALUE)
+                .addComponent(panelAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
+        );
+        panelAccountManagerLayout.setVerticalGroup(
+            panelAccountManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAccountManagerLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(panelAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(295, Short.MAX_VALUE))
+        );
+
+        tabPanel.addTab("Accounts Manager", panelAccountManager);
+
         panelHomePage.setToolTipText("");
 
         panelAction1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -193,7 +332,7 @@ public class FrameController extends javax.swing.JFrame {
                 .addGroup(panelAction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnStop1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_StartSeoHomepage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoadWarningIP1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadWarningIP1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addComponent(btnDeleteIP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLoadAllIP1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLoadParameter1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -204,7 +343,7 @@ public class FrameController extends javax.swing.JFrame {
             .addGroup(panelAction1Layout.createSequentialGroup()
                 .addGroup(panelAction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAction1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(84, 84, 84)
                         .addComponent(btnLoadAllIP1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLoadWarningIP1)
@@ -390,92 +529,7 @@ public class FrameController extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("SEO Keyword", panelHomePage);
-
-        panelAccount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel1.setText("UserName");
-
-        jLabel2.setText("IP Address");
-
-        jLabel3.setText("Password");
-
-        tf_username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_usernameActionPerformed(evt);
-            }
-        });
-
-        tf_ip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ipActionPerformed(evt);
-            }
-        });
-        tf_ip.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_ipKeyTyped(evt);
-            }
-        });
-
-        btnChooseFileAccount.setText("Choose File Account");
-        btnChooseFileAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChooseFileAccountActionPerformed(evt);
-            }
-        });
-
-        btnAddOneAccount.setText("Save Account");
-        btnAddOneAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddOneAccountActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelAccountLayout = new javax.swing.GroupLayout(panelAccount);
-        panelAccount.setLayout(panelAccountLayout);
-        panelAccountLayout.setHorizontalGroup(
-            panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAccountLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_ip, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                    .addComponent(tf_username)
-                    .addComponent(tf_password))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAccountLayout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAddOneAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChooseFileAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
-        );
-        panelAccountLayout.setVerticalGroup(
-            panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAccountLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_ip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddOneAccount)
-                .addGap(12, 12, 12)
-                .addComponent(btnChooseFileAccount)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        tabPanel.addTab("SEO Keyword", panelHomePage);
 
         panelParameter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -640,7 +694,7 @@ public class FrameController extends javax.swing.JFrame {
                     .addGroup(panelParameterLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         panelParameterLayout.setVerticalGroup(
             panelParameterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,7 +731,7 @@ public class FrameController extends javax.swing.JFrame {
                     .addComponent(tf_comments, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSubmitParameters)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         panelAction.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -738,10 +792,10 @@ public class FrameController extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLoadAllIP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoadWarningIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadWarningIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                     .addComponent(btnStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnStop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoadParameter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(btnLoadParameter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDeleteIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -749,10 +803,10 @@ public class FrameController extends javax.swing.JFrame {
             panelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelActionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(panelActionLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(84, 84, 84)
                 .addComponent(btnLoadAllIP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLoadWarningIP)
@@ -772,43 +826,359 @@ public class FrameController extends javax.swing.JFrame {
         panelSuggestLayout.setHorizontalGroup(
             panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuggestLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelSuggestLayout.createSequentialGroup()
-                        .addComponent(panelAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(panelAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelSuggestLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         panelSuggestLayout.setVerticalGroup(
             panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuggestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(panelAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelParameter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("SEO Suggest", panelSuggest);
+        tabPanel.addTab("SEO Suggest", panelSuggest);
+
+        panelAction2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnLoadAllIPClickSuggest.setText("Load All IP");
+        btnLoadAllIPClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadAllIPClickSuggestActionPerformed(evt);
+            }
+        });
+
+        btnLoadWarningIPClickSuggest.setText("Load Warning IP");
+        btnLoadWarningIPClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadWarningIPClickSuggestActionPerformed(evt);
+            }
+        });
+
+        jListInformationClickSuggest.setModel(listModelInformation);
+        jListInformationClickSuggest.setVisibleRowCount(20);
+        jScrollPane4.setViewportView(jListInformationClickSuggest);
+
+        btn_StartClickSuggest.setText("Start");
+        btn_StartClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_StartClickSuggestActionPerformed(evt);
+            }
+        });
+
+        btnStopClickSuggest.setText("Stop");
+        btnStopClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopClickSuggestActionPerformed(evt);
+            }
+        });
+
+        btnLoadParameterClickSuggest.setText("Load Parameter");
+        btnLoadParameterClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadParameterClickSuggestActionPerformed(evt);
+            }
+        });
+
+        btnDeleteIPClickSuggest.setText("Delete");
+        btnDeleteIPClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteIPClickSuggestActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelAction2Layout = new javax.swing.GroupLayout(panelAction2);
+        panelAction2.setLayout(panelAction2Layout);
+        panelAction2Layout.setHorizontalGroup(
+            panelAction2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAction2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(panelAction2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnStopClickSuggest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_StartClickSuggest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadWarningIPClickSuggest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(btnDeleteIPClickSuggest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadAllIPClickSuggest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoadParameterClickSuggest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelAction2Layout.setVerticalGroup(
+            panelAction2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAction2Layout.createSequentialGroup()
+                .addGroup(panelAction2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAction2Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(btnLoadAllIPClickSuggest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLoadWarningIPClickSuggest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_StartClickSuggest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnStopClickSuggest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLoadParameterClickSuggest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDeleteIPClickSuggest))
+                    .addGroup(panelAction2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        panelParameter1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel5.setText("Watch time (s)");
+
+        jLabel16.setText("My Channels");
+
+        jLabel17.setText("Source Videos");
+
+        jLabel25.setText("Comments");
+
+        tf_minTimeClickVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_minTimeClickVideoActionPerformed(evt);
+            }
+        });
+        tf_minTimeClickVideo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_minTimeClickVideoKeyTyped(evt);
+            }
+        });
+
+        tf_Channels.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_ChannelsMouseClicked(evt);
+            }
+        });
+        tf_Channels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_ChannelsActionPerformed(evt);
+            }
+        });
+
+        tf_maxTimeClickVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_maxTimeClickVideoActionPerformed(evt);
+            }
+        });
+        tf_maxTimeClickVideo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_maxTimeClickVideoKeyTyped(evt);
+            }
+        });
+
+        tf_sourceVideos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_sourceVideosMouseClicked(evt);
+            }
+        });
+        tf_sourceVideos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_sourceVideosActionPerformed(evt);
+            }
+        });
+
+        tf_commentsClickSuggest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_commentsClickSuggestMouseClicked(evt);
+            }
+        });
+        tf_commentsClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_commentsClickSuggestActionPerformed(evt);
+            }
+        });
+
+        btnSubmitParametersClickSuggest.setText("Save Parameters");
+        btnSubmitParametersClickSuggest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitParametersClickSuggestActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("from");
+
+        jLabel27.setText("to");
+
+        jLabel28.setText("(s)");
+
+        jLabel29.setText("(s)");
+
+        jLabel30.setText("Watch time (s)");
+
+        jLabel31.setText("from");
+
+        tf_minTimeSourceVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_minTimeSourceVideoActionPerformed(evt);
+            }
+        });
+        tf_minTimeSourceVideo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_minTimeSourceVideoKeyTyped(evt);
+            }
+        });
+
+        jLabel32.setText("(s)");
+
+        jLabel33.setText("to");
+
+        tf_maxTimeSourceVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_maxTimeSourceVideoActionPerformed(evt);
+            }
+        });
+        tf_maxTimeSourceVideo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_maxTimeSourceVideoKeyTyped(evt);
+            }
+        });
+
+        jLabel34.setText("(s)");
+
+        javax.swing.GroupLayout panelParameter1Layout = new javax.swing.GroupLayout(panelParameter1);
+        panelParameter1.setLayout(panelParameter1Layout);
+        panelParameter1Layout.setHorizontalGroup(
+            panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelParameter1Layout.createSequentialGroup()
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelParameter1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_commentsClickSuggest, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_Channels, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_sourceVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelParameter1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelParameter1Layout.createSequentialGroup()
+                                        .addComponent(jLabel26)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(tf_minTimeClickVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(tf_maxTimeClickVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel29))
+                                    .addGroup(panelParameter1Layout.createSequentialGroup()
+                                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(tf_minTimeSourceVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel32)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jLabel33)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(tf_maxTimeSourceVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel34))))))
+                    .addGroup(panelParameter1Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnSubmitParametersClickSuggest, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelParameter1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        panelParameter1Layout.setVerticalGroup(
+            panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelParameter1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(tf_Channels, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tf_minTimeClickVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_maxTimeClickVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(tf_sourceVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(tf_minTimeSourceVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_maxTimeSourceVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel33)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelParameter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(tf_commentsClickSuggest, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSubmitParametersClickSuggest)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelClickSuggestLayout = new javax.swing.GroupLayout(panelClickSuggest);
+        panelClickSuggest.setLayout(panelClickSuggestLayout);
+        panelClickSuggestLayout.setHorizontalGroup(
+            panelClickSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClickSuggestLayout.createSequentialGroup()
+                .addGroup(panelClickSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelClickSuggestLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelAction2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelClickSuggestLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(panelParameter1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        panelClickSuggestLayout.setVerticalGroup(
+            panelClickSuggestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClickSuggestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelParameter1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
+                .addComponent(panelAction2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabPanel.addTab("Click Suggest Videos", panelClickSuggest);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(tabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, Short.MAX_VALUE))
+                .addComponent(tabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -1685,6 +2055,409 @@ public class FrameController extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_maxTimeOtherKeyTyped
 
+    private void btnLoadAllIPClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadAllIPClickSuggestActionPerformed
+        try {
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listIps.size();
+                int index = jListInformationClickSuggest.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformationClickSuggest.getSelectedIndex();
+
+                String arrayStrings[] = new String[serverControler.listInfos.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listInfos.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformationClickSuggest.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformationClickSuggest.setListData(arrayStrings);
+
+                jListInformationClickSuggest.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformationClickSuggest.setSelectedIndex(selectedIndex);
+                }
+
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLoadAllIPClickSuggestActionPerformed
+
+    private void btnLoadWarningIPClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadWarningIPClickSuggestActionPerformed
+        try {
+            boolean done = serverControler.getAllAccountFromMySQL();
+            if (done) {
+                int listIpSize = serverControler.listWarning.size();
+                int index = jListInformationClickSuggest.getLastVisibleIndex();
+                if (index > listIpSize - 1) {
+                    index = listIpSize - 1;
+                }
+                int selectedIndex = jListInformationClickSuggest.getSelectedIndex();
+
+                String arrayStrings[] = new String[serverControler.listWarning.size() + 1];
+                arrayStrings[0] = "0.     0.0.0.0     SUPER IP ADDRESS";
+                for (int i = 0; i < listIpSize; i++) {
+                    String tempString = serverControler.listWarning.get(i);
+                    arrayStrings[i + 1] = (i + 1) + ".     " + tempString;
+                }
+                jListInformationClickSuggest.setListData(new String[0]);
+                Thread.sleep(1);
+                jListInformationClickSuggest.setListData(arrayStrings);
+
+                jListInformationClickSuggest.ensureIndexIsVisible(index);
+                if (selectedIndex >= 0) {
+                    jListInformationClickSuggest.setSelectedIndex(selectedIndex);
+                }
+                JOptionPane.showMessageDialog(null, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLoadWarningIPClickSuggestActionPerformed
+
+    private void btn_StartClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartClickSuggestActionPerformed
+        try {
+            String selection = jListInformationClickSuggest.getSelectedValue();
+            if (selection != null) {
+                if (selection.split("     ").length >= 2) {
+                    String ip = selection.split("     ")[1];
+                    String groupIPs = "";
+                    if (ip.compareTo("0.0.0.0") == 0) {
+                        ListModel<String> model = jListInformationClickSuggest.getModel();
+                        for (int i = 1; i < model.getSize(); i++) {
+                            String line = model.getElementAt(i).toString();
+                            if (line.split("     ").length >= 2) {
+                                String tempIP = line.split("     ")[1].trim();
+                                groupIPs += "'" + tempIP + "',";
+                            }
+                        }
+                        if (groupIPs.length() >= 1) {
+                            groupIPs = groupIPs.substring(0, groupIPs.length() - 1);
+                        }
+                        groupIPs = "(" + groupIPs + ")";
+                    } else {
+                        groupIPs += "('" + ip + "')";
+                    }
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure start this? " + ip,
+                            "Warning", JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        boolean done = serverControler.setStatus(groupIPs, 3);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_StartClickSuggestActionPerformed
+
+    private void btnStopClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopClickSuggestActionPerformed
+        try {
+            String selection = jListInformationClickSuggest.getSelectedValue();
+            if (selection != null) {
+                if (selection.split("     ").length >= 2) {
+                    String ip = selection.split("     ")[1];
+                    String groupIPs = "";
+                    if (ip.compareTo("0.0.0.0") == 0) {
+                        ListModel<String> model = jListInformationClickSuggest.getModel();
+                        for (int i = 1; i < model.getSize(); i++) {
+                            String line = model.getElementAt(i).toString();
+                            if (line.split("     ").length >= 2) {
+                                String tempIP = line.split("     ")[1].trim();
+                                groupIPs += "'" + tempIP + "',";
+                            }
+                        }
+                        if (groupIPs.length() >= 1) {
+                            groupIPs = groupIPs.substring(0, groupIPs.length() - 1);
+                        }
+                        groupIPs = "(" + groupIPs + ")";
+                    } else {
+                        groupIPs += "('" + ip + "')";
+                    }
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure stop this? " + ip,
+                            "Warning", JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        boolean done = serverControler.setStatus(groupIPs, 0);
+                        if (done) {
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnStopClickSuggestActionPerformed
+
+    private void btnLoadParameterClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadParameterClickSuggestActionPerformed
+        try {
+            String[] arrayParameters = serverControler.getParameterClickSuggest();
+
+            int selectedIndex = jListInformationClickSuggest.getSelectedIndex();
+            jListInformationClickSuggest.setListData(new String[0]);
+            Thread.sleep(1);
+            jListInformationClickSuggest.setListData(arrayParameters);
+
+            if (selectedIndex >= 0) {
+                jListInformationClickSuggest.setSelectedIndex(selectedIndex);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLoadParameterClickSuggestActionPerformed
+
+    private void btnDeleteIPClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteIPClickSuggestActionPerformed
+        try {
+            String selection = jListInformationClickSuggest.getSelectedValue();
+            if (selection != null) {
+                if (selection.split("     ").length >= 2) {
+                    String ip = selection.split("     ")[1].trim();
+                    String groupIPs = "";
+                    if (ip.compareTo("0.0.0.0") == 0) {
+                        ListModel<String> model = jListInformationClickSuggest.getModel();
+                        for (int i = 1; i < model.getSize(); i++) {
+                            String line = model.getElementAt(i).toString();
+                            if (line.split("     ").length >= 2) {
+                                String tempIP = line.split("     ")[1].trim();
+                                groupIPs += "'" + tempIP + "',";
+                            }
+                        }
+                        if (groupIPs.length() >= 1) {
+                            groupIPs = groupIPs.substring(0, groupIPs.length() - 1);
+                        }
+                        groupIPs = "(" + groupIPs + ")";
+                    } else {
+                        groupIPs += "('" + ip + "')";
+                    }
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure delete? " + ip,
+                            "Warning", JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        boolean done = serverControler.deleteAccountInMySQL(groupIPs);
+                        if (done) {
+                            if (ip.compareTo("0.0.0.0") == 0) {
+                                listModelInformation.removeAllElements();
+                                jListInformationClickSuggest.setListData(new String[0]);
+                            } else {
+                                listModelInformation.removeElement(selection);
+                            }
+
+                            JOptionPane.showMessageDialog(null, "Success!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fail!");
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnDeleteIPClickSuggestActionPerformed
+
+    private void tf_minTimeClickVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_minTimeClickVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_minTimeClickVideoActionPerformed
+
+    private void tf_minTimeClickVideoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minTimeClickVideoKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume(); // ignore event
+        }
+    }//GEN-LAST:event_tf_minTimeClickVideoKeyTyped
+
+    private void tf_ChannelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_ChannelsMouseClicked
+
+        JFileChooser c = new JFileChooser();
+        int rVal = c.showOpenDialog(this);
+        if (rVal == JFileChooser.APPROVE_OPTION) {
+            listChannels = new ArrayList<>();
+            String filepath = c.getCurrentDirectory().toString() + "/" + c.getSelectedFile().getName();
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (line.trim().length() > 0) {
+                        listChannels.add(line);
+                    }
+                }
+                br.close();
+                tf_Channels.setText(filepath);
+            } catch (Exception ex) {
+                tf_Channels.setText("");
+                listChannels = new ArrayList<>();
+            }
+        }
+    }//GEN-LAST:event_tf_ChannelsMouseClicked
+
+    private void tf_ChannelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ChannelsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_ChannelsActionPerformed
+
+    private void tf_maxTimeClickVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_maxTimeClickVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_maxTimeClickVideoActionPerformed
+
+    private void tf_maxTimeClickVideoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxTimeClickVideoKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume(); // ignore event
+        }
+    }//GEN-LAST:event_tf_maxTimeClickVideoKeyTyped
+
+    private void tf_sourceVideosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_sourceVideosMouseClicked
+
+        JFileChooser c = new JFileChooser();
+        int rVal = c.showOpenDialog(this);
+        if (rVal == JFileChooser.APPROVE_OPTION) {
+            listSourceVideosClickSuggest = new ArrayList<>();
+            String filepath = c.getCurrentDirectory().toString() + "/" + c.getSelectedFile().getName();
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (line.trim().length() > 0) {
+                        listSourceVideosClickSuggest.add(line);
+                    }
+                }
+                br.close();
+                tf_sourceVideos.setText(filepath);
+            } catch (Exception ex) {
+                tf_sourceVideos.setText("");
+                listSourceVideosClickSuggest = new ArrayList<>();
+            }
+        }
+    }//GEN-LAST:event_tf_sourceVideosMouseClicked
+
+    private void tf_sourceVideosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_sourceVideosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_sourceVideosActionPerformed
+
+    private void tf_commentsClickSuggestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_commentsClickSuggestMouseClicked
+
+        JFileChooser c = new JFileChooser();
+        int rVal = c.showOpenDialog(this);
+        if (rVal == JFileChooser.APPROVE_OPTION) {
+            listCommentsClickSuggest = new ArrayList<>();
+            String filepath = c.getCurrentDirectory().toString() + "/" + c.getSelectedFile().getName();
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (line.trim().length() > 0) {
+                        listCommentsClickSuggest.add(line);
+                    }
+                }
+                br.close();
+                tf_commentsClickSuggest.setText(filepath);
+            } catch (Exception ex) {
+                tf_commentsClickSuggest.setText("");
+                listCommentsClickSuggest = new ArrayList<>();
+            }
+        }
+    }//GEN-LAST:event_tf_commentsClickSuggestMouseClicked
+
+    private void tf_commentsClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_commentsClickSuggestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_commentsClickSuggestActionPerformed
+
+    private void btnSubmitParametersClickSuggestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitParametersClickSuggestActionPerformed
+        if (listChannels == null || listSourceVideosClickSuggest == null || listCommentsClickSuggest == null) {
+            JOptionPane.showMessageDialog(null, "Fail!");
+        } else {
+            String min_time_second_my_channel = tf_minTimeClickVideo.getText();
+            String max_time_second_my_channel = tf_maxTimeClickVideo.getText();
+            String min_time_second_source_video = tf_minTimeSourceVideo.getText();
+            String max_time_second_source_video = tf_maxTimeSourceVideo.getText();
+            String target_videos = "";
+            for (int i = 0; i < listChannels.size(); i++) {
+                target_videos += listChannels.get(i) + ", ";
+            }
+            if (target_videos.length() >= 2) {
+                target_videos = target_videos.substring(0, target_videos.length() - 2);
+            }
+
+            String other_videos = "";
+            for (int i = 0; i < listSourceVideosClickSuggest.size(); i++) {
+                other_videos += listSourceVideosClickSuggest.get(i) + ", ";
+            }
+            if (other_videos.length() >= 2) {
+                other_videos = other_videos.substring(0, other_videos.length() - 2);
+            }
+
+            String comments = "";
+            for (int i = 0; i < listCommentsClickSuggest.size(); i++) {
+                comments += Utils.normalizeText(listCommentsClickSuggest.get(i)) + ", ";
+            }
+            if (comments.length() >= 2) {
+                comments = comments.substring(0, comments.length() - 2);
+            }
+
+            if (min_time_second_my_channel.length() > 0 && max_time_second_my_channel.length() > 0
+                    && min_time_second_source_video.length() > 0 && max_time_second_source_video.length() > 0
+                    && target_videos.length() > 0 && other_videos.length() > 0 && comments.length() > 0) {
+                try {
+                    boolean done = serverControler.updateParametersClickSuggest(min_time_second_my_channel, max_time_second_my_channel,
+                            min_time_second_source_video, max_time_second_source_video,
+                            target_videos, other_videos, comments);
+                    if (done) {
+                        JOptionPane.showMessageDialog(null, "Success!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fail!");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Fail!");
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail!");
+            }
+        }
+    }//GEN-LAST:event_btnSubmitParametersClickSuggestActionPerformed
+
+    private void tf_minTimeSourceVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_minTimeSourceVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_minTimeSourceVideoActionPerformed
+
+    private void tf_minTimeSourceVideoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minTimeSourceVideoKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume(); // ignore event
+        }
+    }//GEN-LAST:event_tf_minTimeSourceVideoKeyTyped
+
+    private void tf_maxTimeSourceVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_maxTimeSourceVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_maxTimeSourceVideoActionPerformed
+
+    private void tf_maxTimeSourceVideoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxTimeSourceVideoKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume(); // ignore event
+        }
+    }//GEN-LAST:event_tf_maxTimeSourceVideoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -1728,20 +2501,27 @@ public class FrameController extends javax.swing.JFrame {
     private javax.swing.JButton btnChooseFileAccount;
     private javax.swing.JButton btnDeleteIP;
     private javax.swing.JButton btnDeleteIP1;
+    private javax.swing.JButton btnDeleteIPClickSuggest;
     private javax.swing.JButton btnLoadAllIP;
     private javax.swing.JButton btnLoadAllIP1;
+    private javax.swing.JButton btnLoadAllIPClickSuggest;
     private javax.swing.JButton btnLoadParameter;
     private javax.swing.JButton btnLoadParameter1;
+    private javax.swing.JButton btnLoadParameterClickSuggest;
     private javax.swing.JButton btnLoadWarningIP;
     private javax.swing.JButton btnLoadWarningIP1;
+    private javax.swing.JButton btnLoadWarningIPClickSuggest;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     private javax.swing.JButton btnStop1;
+    private javax.swing.JButton btnStopClickSuggest;
     private javax.swing.JButton btnSubmitParameters;
     private javax.swing.JButton btnSubmitParameters1;
+    private javax.swing.JButton btnSubmitParametersClickSuggest;
     private javax.swing.JButton btn_AddHashtag;
     private javax.swing.JButton btn_DeleteHashtag;
     private javax.swing.JButton btn_LoadHashtag;
+    private javax.swing.JButton btn_StartClickSuggest;
     private javax.swing.JButton btn_StartSeoHomepage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1750,6 +2530,8 @@ public class FrameController extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1758,39 +2540,63 @@ public class FrameController extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListInformation;
     private javax.swing.JList<String> jListInformation1;
+    private javax.swing.JList<String> jListInformationClickSuggest;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> jlistHashtag;
     private javax.swing.JPanel panelAccount;
+    private javax.swing.JPanel panelAccountManager;
     private javax.swing.JPanel panelAction;
     private javax.swing.JPanel panelAction1;
+    private javax.swing.JPanel panelAction2;
+    private javax.swing.JPanel panelClickSuggest;
     private javax.swing.JPanel panelHomePage;
     private javax.swing.JPanel panelParameter;
+    private javax.swing.JPanel panelParameter1;
     private javax.swing.JPanel panelSuggest;
+    private javax.swing.JTabbedPane tabPanel;
+    private javax.swing.JTextField tf_Channels;
     private javax.swing.JTextField tf_comments;
     private javax.swing.JTextField tf_comments1;
+    private javax.swing.JTextField tf_commentsClickSuggest;
     private javax.swing.JTextField tf_hashtag;
     private javax.swing.JTextField tf_idvideo;
     private javax.swing.JTextField tf_ip;
     private javax.swing.JTextField tf_maxTime;
     private javax.swing.JTextField tf_maxTime1;
+    private javax.swing.JTextField tf_maxTimeClickVideo;
     private javax.swing.JTextField tf_maxTimeOther;
+    private javax.swing.JTextField tf_maxTimeSourceVideo;
     private javax.swing.JTextField tf_minTime;
     private javax.swing.JTextField tf_minTime1;
+    private javax.swing.JTextField tf_minTimeClickVideo;
     private javax.swing.JTextField tf_minTimeOther;
+    private javax.swing.JTextField tf_minTimeSourceVideo;
     private javax.swing.JTextField tf_myVideos;
     private javax.swing.JTextField tf_otherVideos;
     private javax.swing.JPasswordField tf_password;
+    private javax.swing.JTextField tf_sourceVideos;
     private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
 }
