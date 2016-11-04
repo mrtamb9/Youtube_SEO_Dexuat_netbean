@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
+import parameter.Parameters;
 
 public class Utils {
 
@@ -37,21 +37,17 @@ public class Utils {
         return result;
     }
 
-    public static String getIp() throws Exception {
-        URL whatismyip = new URL("http://checkip.amazonaws.com");
-        BufferedReader in = null;
+    public static String getIp() {
         try {
+            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            BufferedReader in = null;
             in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
             String ip = in.readLine();
+            in.close();
             return ip;
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
@@ -88,7 +84,7 @@ public class Utils {
         c.setTime(currentDate);
         c.add(Calendar.HOUR, -7);
         // c.add(Calendar.MINUTE, -15); 
-        c.add(Calendar.SECOND, -1 * parameter.Parameters.warning_seconds);
+        c.add(Calendar.SECOND, -1 * Parameters.warning_seconds);
         Date minDate = c.getTime();
         return minDate;
     }

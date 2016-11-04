@@ -11,7 +11,7 @@ import utils.Utils;
 
 public class Parameters {
 
-    public static final String file_driver = "geckodriver/chromedriver.exe";
+    public String file_driver = "geckodriver/chromedriver.exe";
     public String username = "";
     public String password = "";
     public String status = "";
@@ -37,8 +37,8 @@ public class Parameters {
     public int max_time_second_source_video = 0;
     public int min_time_second_source_video = 0;
 
-    public static int max_second_wait = 10;
-    public static int warning_seconds = 600;
+    public int max_second_wait = 10;
+    static public int warning_seconds = 600;
 
     public Parameters() {
         try {

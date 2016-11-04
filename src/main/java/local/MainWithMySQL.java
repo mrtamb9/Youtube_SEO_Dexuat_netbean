@@ -1,8 +1,6 @@
 package local;
 
-import java.awt.AWTException;
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +25,8 @@ import utils.Utils;
 public class MainWithMySQL {
 
     final int max_comments = 1;
-    HashMap<String, Integer> mapLimitComments = new HashMap<>();
+    HashMap<String, Integer> mapLimitCommentSeoSuggest = new HashMap<>();
+    HashMap<String, Integer> mapLimitCommentClickSuggest = new HashMap<>();
 
     WebDriver driver;
     WebDriverWait wait;
@@ -68,17 +67,22 @@ public class MainWithMySQL {
     }
 
     // change language --> English (in case it was not in English)
-    void changeLanguage() throws InterruptedException {
+    void changeLanguage() {
         driver.get("https://www.youtube.com/my_videos?o=U");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("yt-picker-language-button")));
-        Thread.sleep(1000);
-        System.out.println(1);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         driver.findElement(By.id("yt-picker-language-button")).click();
-        System.out.println(2);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[@class=\"yt-picker-item\"]")));
-        System.out.println(3);
         System.out.println(driver.findElement(By.xpath("//strong[@class=\"yt-picker-item\"]")).getText());
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         if (driver.findElement(By.xpath("//strong[@class=\"yt-picker-item\"]")).getText().compareTo("English (US)") != 0) {
             driver.findElement(By.xpath("//button[@value=\"en\"]")).click();
         }
@@ -88,23 +92,27 @@ public class MainWithMySQL {
             if (driver.findElement(By.xpath("//link[@rel=\"search\"]")).getAttribute("href").toString().contains("locale=en_US")) {
                 break;
             }
-            Thread.sleep(500);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                // do nothing
+            }
         }
-
         System.out.println("Change language done! English!");
     }
 
     // change location --> US (in case it was not in US)
-    void changeLocation() throws InterruptedException {
+    void changeLocation() {
         driver.get("https://www.youtube.com/?persist_gl=1&gl=US");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-positioner")));
         System.out.println("Change location done! United States!");
     }
 
-    void init_main() throws InterruptedException, AWTException, IOException {
-        mapLimitComments = new HashMap<>();
+    void init_main() {
+        mapLimitCommentSeoSuggest = new HashMap<>();
+        mapLimitCommentClickSuggest = new HashMap<>();
 
-        System.setProperty("webdriver.chrome.driver", Parameters.file_driver);
+        System.setProperty("webdriver.chrome.driver", parameters.file_driver);
         ChromeOptions options = new ChromeOptions();
         options.addExtensions(new File("geckodriver/extension.crx"));
         driver = new ChromeDriver(options);
@@ -127,16 +135,24 @@ public class MainWithMySQL {
         System.out.println("Done init!");
     }
 
-    void watchVideo(String url, int min_time, int max_time) throws InterruptedException, Exception {
+    void watchVideo(String url, int min_time, int max_time) {
         url = url + "&t=1s";
         System.out.println(url);
         driver.get(url);
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         // scroll dơwn
-        Thread.sleep(1000);
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)", "");
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
 
         int watch_time = Utils.getRandomNumber(min_time, max_time);
         System.out.println("watch_time = " + watch_time + "(s)");
@@ -153,28 +169,20 @@ public class MainWithMySQL {
         while (step < max_step) {
             step++;
             if (step % 60 == 0) {
-
-//                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a/span[3]/span")).getAttribute("data-ytid");
-//                System.out.println(tempChannel);
-//                driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a")).sendKeys(Keys.ENTER);
-//                driver.findElement(By.id("watch-more-related-button")).click();
-//                Thread.sleep(1000);
-//                driver.findElement(By.xpath("//*[@id=\"watch-related\"]/li[1]/div[1]/div[1]/a")).sendKeys(Keys.ENTER);
                 if (myLogs.checkStop() == true || driver.getCurrentUrl().compareTo(url) != 0) {
                     return;
                 }
             }
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                // do nothing
+            }
         }
 
         if (driver.getCurrentUrl().compareTo(url) == 0) {
             // check like a comment
-            if (Utils.getRandomNumber(0, 1000) % 2 == 1 && mapLimitComments.getOrDefault(url, 0) < max_comments) {
-                if (mapLimitComments.containsKey(url)) {
-                    mapLimitComments.put(url, mapLimitComments.get(url) + 1);
-                } else {
-                    mapLimitComments.put(url, 1);
-                }
+            if (Utils.getRandomNumber(0, 1000) % 2 == 1 && mapLimitCommentSeoSuggest.getOrDefault(url, 0) < max_comments) {
 
                 try {
                     int indexSection = Utils.getRandomNumber(1, 1000) % 10 + 1;
@@ -200,6 +208,13 @@ public class MainWithMySQL {
                             }
                         }
                     }
+
+                    if (mapLimitCommentSeoSuggest.containsKey(url)) {
+                        mapLimitCommentSeoSuggest.put(url, mapLimitCommentSeoSuggest.get(url) + 1);
+                    } else {
+                        mapLimitCommentSeoSuggest.put(url, 1);
+                    }
+
                     Thread.sleep(1000);
                 } catch (Exception e) {
                     System.err.println("Like a comment fail!");
@@ -208,7 +223,11 @@ public class MainWithMySQL {
 
             // subscribe
             if (Utils.getRandomNumber(0, 1000) % 2 == 1) {
-                Thread.sleep(1000);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    // do nothing
+                }
                 try {
                     if (driver.findElement(By.xpath("//*[@id=\"watch7-subscription-container\"]/span/button[1]/span/span[1]")).isDisplayed()) {
                         System.out.println("Action subscribe");
@@ -222,10 +241,10 @@ public class MainWithMySQL {
         }
     }
 
-    void startSeoSuggest() throws Exception {
+    void startSeoSuggest() {
         myLogs.saveLog(simpleDateFormat.format(new Date()) + " starting... " + (new Date()));
         init_main();
-        Parameters.warning_seconds = parameters.max_time_second_my_video;
+        parameters.warning_seconds = parameters.max_time_second_my_video;
 
         // String targetVideo = parameters.listTargetVideos.get(0);
         int sizeTargetVideo = parameters.listTargetVideos.size();
@@ -272,13 +291,13 @@ public class MainWithMySQL {
         }
     }
 
-    void searchVideo(String id_hashtag, int indexVideo) throws InterruptedException, Exception {
+    void searchVideo(String id_hashtag, int indexVideo) {
         System.out.println(id_hashtag);
         driver.get("https://www.youtube.com/");
 
         int secondWait = 0;
         try {
-            while (secondWait < Parameters.max_second_wait && !driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
+            while (secondWait < parameters.max_second_wait && !driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
                 System.out.println("waiting youtube.com load done ...");
                 Thread.sleep(1000);
             }
@@ -286,7 +305,11 @@ public class MainWithMySQL {
             e.printStackTrace();
         }
 
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         try {
             if (driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
                 driver.findElement(By.id("masthead-search-term")).sendKeys(id_hashtag.split("     ")[1] + " \"" + id_hashtag.split("     ")[0] + "\"");
@@ -297,7 +320,11 @@ public class MainWithMySQL {
             System.out.println("Search hashtag fail!");
         }
 
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         secondWait = 0;
         try {
             while (secondWait < parameters.max_second_wait && driver.findElement(By.id("masthead-appbar-container")).isDisplayed()) {
@@ -309,7 +336,11 @@ public class MainWithMySQL {
             e.printStackTrace();
         }
 
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
         try {
             if (driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).isDisplayed()) {
                 driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).click();
@@ -342,7 +373,11 @@ public class MainWithMySQL {
                     return;
                 }
             }
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                // do nothing
+            }
         }
 
         if (driver.getCurrentUrl().compareTo(url) == 0) {
@@ -403,14 +438,18 @@ public class MainWithMySQL {
                 System.out.println("Comment fail!");
             }
 
-            Thread.sleep(2000);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                // do nothing
+            }
         }
     }
 
-    void startSeoKeyword() throws Exception {
+    void startSeoKeyword() {
         myLogs.saveLog(simpleDateFormat.format(new Date()) + " starting... " + (new Date()));
         init_main();
-        Parameters.warning_seconds = parameters.max_time_second1;
+        parameters.warning_seconds = parameters.max_time_second1;
         ServerControls serverController = new ServerControls();
 
         // get list hashtags from mysql
@@ -436,10 +475,10 @@ public class MainWithMySQL {
         myLogs.setStatus(0);
     }
 
-    void startClickSuggest() throws Exception {
+    void startClickSuggest() {
         myLogs.saveLog(simpleDateFormat.format(new Date()) + " starting... " + (new Date()));
         init_main();
-        Parameters.warning_seconds = parameters.max_time_second_my_channel;
+        parameters.warning_seconds = parameters.max_time_second_my_channel;
 
         int sizeChannel = parameters.listChannels.size();
         int sizeSourceVideo = parameters.listSourceVideos.size();
@@ -473,16 +512,23 @@ public class MainWithMySQL {
         }
     }
 
-    void clickSuggestVideo(String source_video) throws InterruptedException, Exception {
+    void clickSuggestVideo(String source_video) {
         source_video = source_video + "&t=1s";
         System.out.println(source_video);
         driver.get(source_video);
 
         // scroll dơwn
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)", "");
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
 
         int watch_time_source_video = Utils.getRandomNumber(parameters.min_time_second_source_video, parameters.max_time_second_source_video);
         System.out.println("watch_time = " + watch_time_source_video + "(s)");
@@ -509,16 +555,19 @@ public class MainWithMySQL {
                     // do nothing
                 }
             }
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+            }
         }
-        
+
         if (driver.getCurrentUrl().compareTo(source_video) == 0) {
             // check like a comment
-            if (Utils.getRandomNumber(0, 1000) % 2 == 1 && mapLimitComments.getOrDefault(source_video, 0) < max_comments) {
-                if (mapLimitComments.containsKey(source_video)) {
-                    mapLimitComments.put(source_video, mapLimitComments.get(source_video) + 1);
+            if (Utils.getRandomNumber(0, 1000) % 2 == 1 && mapLimitCommentClickSuggest.getOrDefault(source_video, 0) < max_comments) {
+                if (mapLimitCommentClickSuggest.containsKey(source_video)) {
+                    mapLimitCommentClickSuggest.put(source_video, mapLimitCommentClickSuggest.get(source_video) + 1);
                 } else {
-                    mapLimitComments.put(source_video, 1);
+                    mapLimitCommentClickSuggest.put(source_video, 1);
                 }
 
                 try {
@@ -553,7 +602,10 @@ public class MainWithMySQL {
 
             // subscribe
             if (Utils.getRandomNumber(0, 1000) % 2 == 1) {
-                Thread.sleep(1000);
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                }
                 try {
                     if (driver.findElement(By.xpath("//*[@id=\"watch7-subscription-container\"]/span/button[1]/span/span[1]")).isDisplayed()) {
                         System.out.println("Action subscribe");
@@ -565,22 +617,162 @@ public class MainWithMySQL {
                 }
             }
         }
-        
+
         // click suggest video
         // Check all channel of all video suggested --> list my video channel
         // Random one video and click
         // watch video
-        
-//                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a/span[3]/span")).getAttribute("data-ytid");
-//                System.out.println(tempChannel);
-//                driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a")).sendKeys(Keys.ENTER);
-//                driver.findElement(By.id("watch-more-related-button")).click();
-//                Thread.sleep(1000);
-//                driver.findElement(By.xpath("//*[@id=\"watch-related\"]/li[1]/div[1]/div[1]/a")).sendKeys(Keys.ENTER);
-        
+        // System.out.println(parameters.listChannels.toString());
+        ArrayList<String> listXpathElements = new ArrayList<>();
+        try {
+
+            String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a/span[3]/span")).getAttribute("data-ytid");
+            // System.out.println(tempChannel);                    
+            if (parameters.listChannels.contains(tempChannel)) {
+                listXpathElements.add("//*[@id=\"watch7-sidebar-modules\"]/div[1]/div/div[2]/ul/li/div[1]/a");
+            }
+        } catch (Exception e) {
+            // do nothing
+        }
+
+        for (int i = 1; i <= 19; i++) {
+            try {
+                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch-related\"]/li[" + i + "]/div[1]/div[1]/a/span[3]/span")).getAttribute("data-ytid");
+                // System.out.println(tempChannel);   
+                if (parameters.listChannels.contains(tempChannel)) {
+                    listXpathElements.add("//*[@id=\"watch-related\"]/li[" + i + "]/div[1]/div[1]/a");
+                }
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
+
+        for (int i = 1; i <= 20; i++) {
+            try {
+                String tempChannel = driver.findElement(By.xpath("//*[@id=\"watch-more-related\"]/li[" + i + "]/div[1]/div[1]/a/span[3]/span")).getAttribute("data-ytid");
+                // System.out.println(tempChannel);   
+                if (parameters.listChannels.contains(tempChannel)) {
+                    listXpathElements.add("//*[@id=\"watch-more-related\"]/li[" + i + "]/div[1]/div[1]/a");
+                }
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
+
+        if (listXpathElements.size() > 0) {
+            int indexVideo = Utils.getRandomNumber(0, 1000) % listXpathElements.size();
+            String xpath = listXpathElements.get(indexVideo);
+            System.out.println(xpath);
+            driver.findElement(By.xpath(xpath)).sendKeys(Keys.ENTER);
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+            }
+            watchSuggestedVideo();
+        }
     }
 
-    public static void main(String[] args) throws Exception {
+    void watchSuggestedVideo() {
+        String url = driver.getCurrentUrl();
+        System.out.println("Click suggested video: " + url);
+        // scroll dơwn
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,250)", "");
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+
+        int watch_time = Utils.getRandomNumber(parameters.min_time_second_my_channel, parameters.max_time_second_my_channel);
+        System.out.println("watch_time = " + watch_time + "(s)");
+
+        String log = simpleDateFormat.format(new Date()) + "     loop " + (iter + 1) + "     watching " + url + "     time " + watch_time + "(s)";
+        try {
+            myLogs.saveLog(log);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int max_step = watch_time;
+        int step = 0;
+        while (step < max_step) {
+            step++;
+            if (step % 60 == 0) {
+                if (myLogs.checkStop() == true || driver.getCurrentUrl().compareTo(url) != 0) {
+                    return;
+                }
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+            }
+        }
+
+        if (driver.getCurrentUrl().compareTo(url) == 0) {
+            // check like a comment
+            if (Utils.getRandomNumber(0, 1000) % 2 == 1 && mapLimitCommentClickSuggest.getOrDefault(url, 0) < max_comments) {
+
+                try {
+                    int indexSection = Utils.getRandomNumber(1, 1000) % 10 + 1;
+                    System.out.println("index comment to like and reply: " + indexSection);
+                    if (driver.findElement(By.xpath("//*[@id=\"comment-section-renderer-items\"]/section[" + indexSection + "]/div[1]/div[2]/div[3]/div[1]/button[2]")).isDisplayed()) {
+                        if (driver.findElement(By.xpath("//*[@id=\"comment-section-renderer-items\"]/section[" + indexSection + "]/div[1]/div[2]/div[3]/div[1]/button[2]")).getAttribute("data-action-on") == null) {
+                            System.out.println("Action like a comment");
+                            driver.findElement(By.xpath("//*[@id=\"comment-section-renderer-items\"]/section[" + indexSection + "]/div[1]/div[2]/div[3]/div[1]/button[2]")).click();
+
+                            // reply comment
+                            Thread.sleep(1000);
+                            if (driver.findElement(By.xpath("//*[@id=\"comment-section-renderer-items\"]/section[" + indexSection + "]/div[1]/div[2]/div[3]/div[1]/button[1]")).isDisplayed()) {
+                                System.out.println("Action reply a comment");
+                                driver.findElement(By.xpath("//*[@id=\"comment-section-renderer-items\"]/section[" + indexSection + "]/div[1]/div[2]/div[3]/div[1]/button[1]")).click();
+                                Thread.sleep(1000);
+                                int indexComment = Utils.getRandomNumber(0, parameters.listComments.size() - 1);
+                                String reply = parameters.listComments.get(indexComment);
+                                System.out.println("reply: " + reply);
+                                driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[2]/div[2]")).sendKeys(reply);
+                                Thread.sleep(1000);
+                                driver.findElement(By.xpath("//*[@id=\"comment-simplebox\"]/div[3]/div[2]/button[2]")).click();
+                                Thread.sleep(2000);
+                            }
+                        }
+                    }
+
+                    if (mapLimitCommentClickSuggest.containsKey(url)) {
+                        mapLimitCommentClickSuggest.put(url, mapLimitCommentClickSuggest.get(url) + 1);
+                    } else {
+                        mapLimitCommentClickSuggest.put(url, 1);
+                    }
+
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    System.err.println("Like a comment fail!");
+                }
+            }
+
+            // subscribe
+            if (Utils.getRandomNumber(0, 1000) % 2 == 1) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                }
+                try {
+                    if (driver.findElement(By.xpath("//*[@id=\"watch7-subscription-container\"]/span/button[1]/span/span[1]")).isDisplayed()) {
+                        System.out.println("Action subscribe");
+                        driver.findElement(By.xpath("//*[@id=\"watch7-subscription-container\"]/span/button[1]/span")).click();
+                        Thread.sleep(2000);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Subsribe fail!");
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
 
         System.out.println("=== author: mrtamb9 ===");
         String myIp = Utils.getIp();
@@ -588,7 +780,7 @@ public class MainWithMySQL {
             myIp = args[0];
         }
 
-        myIp = "1.2.3.4";
+        // myIp = "1.2.3.4";
 
         LocalControls.insertAccount(myIp, "", "");
 
@@ -607,7 +799,12 @@ public class MainWithMySQL {
             }
 
             System.out.println(myIp + " waiting 1s util status = 1 or 2");
-            Thread.sleep(5000);
+            try {
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             mainObject.myLogs.saveLog(simpleDateFormat.format(new Date()) + " waiting... ");
         }
     }
