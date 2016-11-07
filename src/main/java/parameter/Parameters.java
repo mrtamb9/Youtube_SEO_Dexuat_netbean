@@ -71,6 +71,7 @@ public class Parameters {
             connect = ConnectionPool.getConnection();
             statement = connect.createStatement();
             String query = "SELECT * FROM account_dexuat WHERE ip = \'" + myIp + "\';";
+            // System.out.println(query);
             resultset = statement.executeQuery(query);
             if (resultset.next()) {
                 String running = resultset.getString("running");
@@ -83,7 +84,8 @@ public class Parameters {
             ConnectionPool.closeConnection(resultset, statement, connect);
         } catch (SQLException e) {
             ConnectionPool.closeConnection(resultset, statement, connect);
-            System.out.println("Get acount fail!");
+            System.out.println("Get acount fail!");            
+            e.printStackTrace();
         }
     }
 

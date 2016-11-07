@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import controls.LocalControls;
 import controls.ServerControls;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.Keys;
 import parameter.Parameters;
 import utils.Utils;
@@ -37,7 +39,8 @@ public class MainWithMySQL {
     Parameters parameters;
     LocalControls myLogs;
 
-    static public DateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+    static DateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+    
     int iter = 0;
 
     public MainWithMySQL() {
@@ -52,18 +55,26 @@ public class MainWithMySQL {
 
     // login _youtube
     void login() {
-        System.out.println("Login...");
-        driver.get("https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26feature%3Dsign_in_button%26next%3D%252F%26hl%3Den&service=youtube&uilel=3&hl=en#identifier");
-        driver.findElement(By.id("Email")).sendKeys(parameters.username);
-        driver.findElement(By.id("next")).click();
+        try {
+            System.out.println("Login...");
+            driver.get("https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26feature%3Dsign_in_button%26next%3D%252F%26hl%3Den&service=youtube&uilel=3&hl=en#identifier");
+            driver.findElement(By.id("Email")).sendKeys(parameters.username);
+            driver.findElement(By.id("next")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Passwd")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Passwd")));
 
-        driver.findElement(By.id("Passwd")).sendKeys(parameters.password);
-        driver.findElement(By.id("signIn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-positioner")));
+            driver.findElement(By.id("Passwd")).sendKeys(parameters.password);
+            driver.findElement(By.id("signIn")).click();
 
-        System.out.println("Login success! " + parameters.username);
+            Thread.sleep(5000);
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-positioner")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-search-term")));
+
+            System.out.println("Login success! " + parameters.username);
+        } catch (Exception e) {
+            e.printStackTrace();
+            driver.quit();
+        }
     }
 
     // change language --> English (in case it was not in English)
@@ -104,7 +115,17 @@ public class MainWithMySQL {
     // change location --> US (in case it was not in US)
     void changeLocation() {
         driver.get("https://www.youtube.com/?persist_gl=1&gl=US");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-positioner")));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainWithMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-positioner")));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-search-term")));
+        } catch (Exception e) {
+            driver.quit();
+        }
         System.out.println("Change location done! United States!");
     }
 
@@ -120,6 +141,15 @@ public class MainWithMySQL {
 
         // login _youtube
         login();
+        if (driver == null) {
+            System.out.println("login fail! quit driver");
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                // do nothing
+            }
+            System.exit(1);
+        }
 
         // close extension windows
         String base = driver.getWindowHandle();
@@ -141,7 +171,7 @@ public class MainWithMySQL {
         driver.get(url);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             // do nothing
         }
@@ -249,13 +279,21 @@ public class MainWithMySQL {
         // String targetVideo = parameters.listTargetVideos.get(0);
         int sizeTargetVideo = parameters.listTargetVideos.size();
         int sizeOtherVideo = parameters.listOtherVideos.size();
+        // System.out.println(parameters.listTargetVideos);
+        // System.out.println(parameters.listOtherVideos);
 
         int times = 0;
         iter = 0;
 
         while (true) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainWithMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println("Repeat: " + (++times));
             ArrayList<Integer> listIndexs = Utils.getListRandomNumbers(sizeOtherVideo, sizeOtherVideo);
+            System.out.println(listIndexs);
             for (int i = 0; i < listIndexs.size(); i++) {
                 int index = listIndexs.get(i);
                 String otherVideo = parameters.listOtherVideos.get(index);
@@ -344,6 +382,7 @@ public class MainWithMySQL {
         try {
             if (driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).isDisplayed()) {
                 driver.findElement(By.xpath("//*/li/div/div/div[2]/h3/a")).click();
+                Thread.sleep(2000);
                 JavascriptExecutor jse = (JavascriptExecutor) driver;
                 jse.executeScript("window.scrollBy(0,250)", "");
                 Thread.sleep(1000);
@@ -480,7 +519,6 @@ public class MainWithMySQL {
         init_main();
         parameters.warning_seconds = parameters.max_time_second_my_channel;
 
-        int sizeChannel = parameters.listChannels.size();
         int sizeSourceVideo = parameters.listSourceVideos.size();
 
         int times = 0;
@@ -519,7 +557,7 @@ public class MainWithMySQL {
 
         // scroll dơwn
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (Exception e) {
         }
 
@@ -781,7 +819,6 @@ public class MainWithMySQL {
         }
 
         // myIp = "1.2.3.4";
-
         LocalControls.insertAccount(myIp, "", "");
 
         int count = 0;

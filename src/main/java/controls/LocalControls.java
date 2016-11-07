@@ -121,8 +121,7 @@ public class LocalControls {
     }
 
     public static void main(String[] args) throws Exception {
-        LocalControls control = new LocalControls("0.0.0.0");
-        control.saveLog("no log 4");
-        System.out.println("All done!");
+        // LocalControls control = new LocalControls("0.0.0.0");
+        insertAccount("0.0.0.0", "username", "password");
     }
 }
