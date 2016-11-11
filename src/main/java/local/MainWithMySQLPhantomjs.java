@@ -34,10 +34,8 @@ import org.apache.commons.io.*;
 import parameter.Parameters;
 import utils.Utils;
 
-public class MainWithMySQL {
+public class MainWithMySQLPhantomjs {
 
-	String file_driver = "geckodriver/chromedriver.exe";
-	String file_cookie = "geckodriver/cookie.obj";
 	final int max_comments = 1;
 	HashMap<String, Integer> mapLimitCommentSeoSuggest = new HashMap<>();
 	HashMap<String, Integer> mapLimitCommentClickSuggest = new HashMap<>();
@@ -55,12 +53,12 @@ public class MainWithMySQL {
 
 	int iter = 0;
 
-	public MainWithMySQL() {
+	public MainWithMySQLPhantomjs() {
 		parameters = new Parameters();
 		myLogs = new LocalControls();
 	}
 
-	public MainWithMySQL(String myIp) {
+	public MainWithMySQLPhantomjs(String myIp) {
 		parameters = new Parameters(myIp);
 		myLogs = new LocalControls(myIp);
 	}
@@ -108,7 +106,7 @@ public class MainWithMySQL {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException ex) {
-			Logger.getLogger(MainWithMySQL.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(MainWithMySQLPhantomjs.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-search-term")));
@@ -123,10 +121,18 @@ public class MainWithMySQL {
 	}
 
 	void loadDriver() {
-		System.setProperty("webdriver.chrome.driver", file_driver);
-		ChromeOptions options = new ChromeOptions();
-		options.addExtensions(new File("geckodriver/extension.crx"));
-		driver = new ChromeDriver(options);
+		// http://phantomjs.org/download.html
+		Capabilities caps = new DesiredCapabilities();
+		((DesiredCapabilities) caps).setJavascriptEnabled(true);
+		((DesiredCapabilities) caps).setCapability("takesScreenshot", true);
+		((DesiredCapabilities) caps).setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+				"phantomjs/phantomjs.exe");
+
+		String[] phantomArgs = new String[] { "--webdriver-loglevel=NONE" };
+		((DesiredCapabilities) caps).setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomArgs);
+
+		driver = new PhantomJSDriver(caps);
+
 		wait = new WebDriverWait(driver, 100);
 	}
 
@@ -139,7 +145,7 @@ public class MainWithMySQL {
 			driver.findElement(By.id("Email")).sendKeys(parameters.username);
 			Thread.sleep(500);
 			driver.findElement(By.id("next")).click();
-			
+
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Passwd")));
 
 			System.out.println("a");
@@ -148,16 +154,23 @@ public class MainWithMySQL {
 			driver.findElement(By.id("signIn")).click();
 			System.out.println("b");
 			Thread.sleep(5000);
-			
+
 			// dang nhap loi thi van vao view binh thuong: comment dong duoi lai
 			// wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("masthead-search-term")));
-			
+
 			System.out.println("Login Done! " + parameters.username);
+
+			// Now you can do whatever you need to do with it, for example copy
+			// somewhere
+			Thread.sleep(1000);
+			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			org.apache.commons.io.FileUtils.copyFile(scrFile, new File("screenshot.jpg"));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			quitDriver();
 		}
-		
+
 		System.out.println(driver.getCurrentUrl());
 	}
 
@@ -179,16 +192,6 @@ public class MainWithMySQL {
 			}
 			System.exit(1);
 		}
-		
-		// phantomjs khong them extenion nen khong can dong
-		// close extension windows
-		// String base = driver.getWindowHandle();
-		// Set<String> set = driver.getWindowHandles();
-		// set.remove(base);
-		// assert set.size() == 1;
-		// driver.switchTo().window((String) set.toArray()[0]);
-		// driver.close();
-		// driver.switchTo().window(base);
 
 		// change location
 		// changeLocation();
@@ -338,7 +341,7 @@ public class MainWithMySQL {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException ex) {
-				Logger.getLogger(MainWithMySQL.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(MainWithMySQLPhantomjs.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			System.out.println("Repeat: " + (++times));
 			ArrayList<Integer> listIndexs = Utils.getListRandomNumbers(sizeOtherVideo, sizeOtherVideo);
@@ -384,13 +387,16 @@ public class MainWithMySQL {
 
 		int secondWait = 0;
 		try {
-			while (secondWait < parameters.max_second_wait && !driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
+			while (secondWait < parameters.max_second_wait
+					&& !driver.findElement(By.id("masthead-search-term")).isDisplayed()) {
 				System.out.println("waiting youtube.com load done ...");
 				Thread.sleep(1000);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		System.out.println(driver.getCurrentUrl());
 
 		try {
 			Thread.sleep(1000);
@@ -425,6 +431,8 @@ public class MainWithMySQL {
 			e.printStackTrace();
 		}
 
+		System.out.println(driver.getCurrentUrl());
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException ex) {
@@ -442,6 +450,8 @@ public class MainWithMySQL {
 			System.out.println("Search no result!");
 			return;
 		}
+
+		System.out.println(driver.getCurrentUrl());
 
 		String url = driver.getCurrentUrl();
 		int watch_time = Utils.getRandomNumber(parameters.min_time_second1, parameters.max_time_second1);
@@ -932,7 +942,7 @@ public class MainWithMySQL {
 		int count = 0;
 		while (true) {
 			System.out.println(++count);
-			MainWithMySQL mainObject = new MainWithMySQL(myIp);
+			MainWithMySQLPhantomjs mainObject = new MainWithMySQLPhantomjs(myIp);
 			if (mainObject.parameters.username.length() > 0) {
 				if (mainObject.parameters.status.compareTo("1") == 0) {
 					mainObject.startSeoSuggest();

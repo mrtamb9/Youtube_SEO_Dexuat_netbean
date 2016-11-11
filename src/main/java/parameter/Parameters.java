@@ -11,7 +11,6 @@ import utils.Utils;
 
 public class Parameters {
 
-    public String file_driver = "geckodriver/chromedriver.exe";
     public String username = "";
     public String password = "";
     public String status = "";
